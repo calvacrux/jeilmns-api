@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.history.service.mapper.HistoryMapper">
+
+	<select id="selectHistoryListKo" resultType="jeilm.api.app.history.vo.HistoryVO">
+		<![CDATA[
+			/* selectHistoryListKo */
+			SELECT
+				A.HISTORY_YEAR
+				, A.HISTORY_MONTH
+				, A.HISTORY_CONTENT_KO AS HISTORY_CONTENT
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.HISTORY_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_USER_NM_MAIN
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.HISTORY_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_PATH_MAIN
+			FROM
+				TB_HISTORY A
+			WHERE
+				A.USE_STATE = 'Y'
+			ORDER BY
+				A.HISTORY_YEAR DESC, A.HISTORY_MONTH DESC
+		]]>
+	</select>
+	
+	<select id="selectHistoryListEn" resultType="jeilm.api.app.history.vo.HistoryVO">
+		<![CDATA[
+			/* selectHistoryListEn */
+			SELECT
+				A.HISTORY_YEAR
+				, A.HISTORY_MONTH
+				, A.HISTORY_CONTENT_EN AS HISTORY_CONTENT
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.HISTORY_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_USER_NM_MAIN
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.HISTORY_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_PATH_MAIN
+			FROM
+				TB_HISTORY A
+			WHERE
+				A.USE_STATE = 'Y'
+			ORDER BY
+				A.HISTORY_YEAR DESC, A.HISTORY_MONTH DESC
+		]]>
+	</select>
+	
+	<select id="selectHistoryListCn" resultType="jeilm.api.app.history.vo.HistoryVO">
+		<![CDATA[
+			/* selectHistoryListCn */
+			SELECT
+				A.HISTORY_YEAR
+				, A.HISTORY_MONTH
+				, A.HISTORY_CONTENT_CN AS HISTORY_CONTENT
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.HISTORY_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_USER_NM_MAIN
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.HISTORY_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_PATH_MAIN
+			FROM
+				TB_HISTORY A
+			WHERE
+				A.USE_STATE = 'Y'
+			ORDER BY
+				A.HISTORY_YEAR DESC, A.HISTORY_MONTH DESC
+		]]>
+	</select>
+	
+</mapper>

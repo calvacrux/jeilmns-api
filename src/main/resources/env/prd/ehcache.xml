@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
+	
+	<!--여기부터 사용자 환경설정 -->
+	<cache-template name="defaultTemplate">
+		<expiry>
+			<ttl unit="minutes">60</ttl>
+		</expiry>
+        <heap>20</heap>
+	</cache-template>
+	
+	<cache alias="codeCache" uses-template="defaultTemplate">
+	</cache>
+	
+	<cache alias="codeListCache" uses-template="defaultTemplate">
+	</cache>
+	<!--여기까지 사용자 환경설정 -->
+	
+</config>
