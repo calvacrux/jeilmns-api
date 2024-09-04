@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.support.service.mapper.SupportInquireMapper">
+	
+	<insert id="insertSupportInquire" useGeneratedKeys="true" keyProperty="inquire_sn" keyColumn="inquire_sn">
+		<selectKey resultType="string" keyProperty="inquire_sn" order="BEFORE">
+            <![CDATA[
+            	SELECT CONCAT('SI', FN_NEXTVAL('SUPPORT_INQUIRE_SN_SEQ')) INQUIRE_SN FROM DUAL
+            ]]>
+        </selectKey>
+        <![CDATA[
+        	/* insertSupportInquire */
+        	INSERT INTO TB_SUPPORT_INQUIRE
+        		(INQUIRE_SN, INQUIRE_CAT, CUSTOMER_NM, CUSTOMER_TEL, CUSTOMER_MAIL, INQUIRE_TITLE, INQUIRE_CONTENT)
+			VALUES
+				(#{inquire_sn}, #{inquire_cat}, #{customer_nm}, #{customer_tel}, #{customer_mail}, #{inquire_title}, #{inquire_content})   
+        ]]>	
+	</insert>
+
+</mapper>
