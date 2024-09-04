@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.ethics.service.mapper.EthicsReceiveMapper">
+
+	<select id="selectEthicsReceiveList" resultType="jeilm.api.app.ethics.vo.EthicsReceiveVO">
+		<![CDATA[
+			/* selectEthicsReceiveList */
+			SELECT
+				A.RECEIVE_SN
+				, A.RECEIVE_NM
+				, A.RECEIVE_MAIL
+			FROM
+				TB_ETHICS_RECEIVE A
+			WHERE
+				A.USE_STATE = 'Y'
+			ORDER BY
+				A.RECEIVE_NM ASC
+		]]>
+	</select>
+	
+</mapper>

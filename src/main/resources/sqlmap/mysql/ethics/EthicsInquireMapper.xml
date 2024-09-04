@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.ethics.service.mapper.EthicsInquireMapper">
+	
+	<select id="selectEthicsInquireFileList" resultType="jeilm.api.app.mail.vo.MailAttachFileVO">
+		<![CDATA[
+			/* selectEthicsInquireFileList*/
+			SELECT
+				A.FILE_USER_NM
+				, A.FILE_PATH
+			FROM
+				TB_FILE A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.FILE_DATA_SN = #{inquire_sn}
+		]]>
+	</select>
+	
+	<insert id="insertEthicsInquire" useGeneratedKeys="true" keyProperty="inquire_sn" keyColumn="inquire_sn">
+		<selectKey resultType="string" keyProperty="inquire_sn" order="BEFORE">
+            <![CDATA[
+            	SELECT CONCAT('EI', FN_NEXTVAL('ETHICS_INQUIRE_SN_SEQ')) INQUIRE_SN FROM DUAL
+            ]]>
+        </selectKey>
+        <![CDATA[
+        	/* insertEthicsInquire */
+        	INSERT INTO TB_ETHICS_INQUIRE
+        		(INQUIRE_SN, CUSTOMER_NM, CUSTOMER_TEL, CUSTOMER_MAIL, INQUIRE_TITLE, INQUIRE_CONTENT)
+			VALUES
+				(#{inquire_sn}, #{customer_nm}, #{customer_tel}, #{customer_mail}, #{inquire_title}, #{inquire_content})   
+        ]]>	
+	</insert>
+	
+	<update id="deleteEthicsInquire">
+		<![CDATA[
+			/* deleteEthicsInquire */
+			UPDATE
+				TB_ETHICS_INQUIRE
+			SET
+				USE_STATE = 'N'
+				, EDT_SN = #{edt_sn}
+				, EDT_DT = SYSDATE()
+			WHERE
+				INQUIRE_SN = #{inquire_sn}
+		]]>	
+	</update>
+	
+</mapper>

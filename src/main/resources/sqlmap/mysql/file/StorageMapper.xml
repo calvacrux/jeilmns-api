@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.file.service.mapper.StorageMapper">
+
+	<select id="selectFile" resultType="jeilm.api.app.file.vo.StorageVO">
+		<![CDATA[
+			/* selectFile */
+			SELECT
+				A.FILE_SN
+				, FILE_DATA_SN
+				, FILE_CONTENT_CD
+				, A.FILE_USER_NM
+				, A.FILE_SERVER_NM
+				, A.FILE_PATH
+				, A.FILE_ALT
+				, A.FILE_MIME
+				, A.FILE_SIZE
+				, A.FILE_DOWN_CNT
+				, DATE_FORMAT(A.REG_DT, '%Y.%m.%d') REG_DT
+			FROM
+				TB_FILE A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.FILE_SN = #{file_sn}
+		]]>
+	</select>
+	
+	<select id="selectFileList" resultType="jeilm.api.app.file.vo.StorageVO">
+		<![CDATA[
+			/* selectFileList */
+			SELECT
+				A.FILE_SN
+				, FILE_DATA_SN
+				, FILE_CONTENT_CD
+				, A.FILE_USER_NM
+				, A.FILE_SERVER_NM
+				, A.FILE_PATH
+				, A.FILE_ALT
+				, A.FILE_MIME
+				, A.FILE_SIZE
+				, A.FILE_DOWN_CNT
+				, DATE_FORMAT(A.REG_DT, '%Y.%m.%d') REG_DT
+			FROM
+				TB_FILE A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.FILE_DATA_SN = #{file_data_sn}
+		]]>
+	</select>
+	
+	<select id="selectFileCountByDataSn" resultType="int">
+		<![CDATA[
+			/* selectFileCountByDataSn */
+			SELECT
+				COUNT(*) CNT
+			FROM
+				TB_FILE A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.FILE_DATA_SN = #{file_data_sn}
+		]]>
+	</select>
+	
+	<insert id="insertFile" useGeneratedKeys="true" keyProperty="file_sn">
+		<selectKey resultType="string" keyProperty="file_sn" order="BEFORE">
+            <![CDATA[
+            	SELECT CONCAT('FI', FN_NEXTVAL('FILE_SN_SEQ')) FILE_SN FROM DUAL
+            ]]>
+        </selectKey>
+        <![CDATA[
+        	/* insertFile */
+        	INSERT INTO TB_FILE
+        		(FILE_SN, FILE_DATA_SN, FILE_CONTENT_CD, FILE_USER_NM, FILE_SERVER_NM, FILE_PATH, FILE_ALT, FILE_MIME, FILE_SIZE, FILE_DOWN_CNT, REG_SN, REG_DT)
+			VALUES
+				(#{file_sn}, #{file_data_sn}, #{file_content_cd}, #{file_user_nm}, #{file_server_nm}, #{file_path}, #{file_alt}, #{file_mime}, #{file_size}, 0, #{reg_sn}, SYSDATE())   
+        ]]>	
+	</insert>
+	
+	<update id="updateFile">
+		<![CDATA[
+			/* updateFile */
+			UPDATE
+				TB_FILE
+			SET
+				FILE_DATA_SN = #{file_data_sn}
+				, FILE_CONTENT_CD = #{file_content_cd}
+				, FILE_USER_NM = #{file_user_nm}
+				, FILE_SERVER_NM = #{file_server_nm}
+				, FILE_PATH = #{file_path}
+				, FILE_ALT = #{file_alt}
+				, FILE_MIME = #{file_mime}
+				, FILE_SIZE = #{file_size}
+				, FILE_DOWN_CNT = 0
+				, EDT_SN = #{edt_sn}
+				, EDT_DT = SYSDATE()
+			WHERE
+				FILE_SN = #{file_sn}
+		]]>	
+	</update>
+	
+	<update id="deleteFile">
+		<![CDATA[
+			/* deleteFile */
+			UPDATE
+				TB_FILE
+			SET
+				USE_STATE = 'N'
+				, EDT_SN = #{edt_sn}
+				, EDT_DT = SYSDATE()
+			WHERE
+				FILE_SN = #{file_sn}
+		]]>	
+	</update>
+	
+	<update id="deleteFileByDataSn">
+		<![CDATA[
+			/* deleteFileByDataSn */
+			UPDATE
+				TB_FILE
+			SET
+				USE_STATE = 'N'
+				, EDT_SN = #{edt_sn}
+				, EDT_DT = SYSDATE()
+			WHERE
+				FILE_DATA_SN = #{file_data_sn}
+		]]>	
+	</update>
+	
+	<update id="updateFileDownCountPlus">
+		<![CDATA[
+			/* updateFileDownCountPlus */
+			UPDATE
+				TB_FILE
+			SET
+				FILE_DOWN_CNT = FILE_DOWN_CNT + 1
+			WHERE
+				FILE_SN = #{file_sn}
+		]]>	
+	</update>
+
+</mapper>
