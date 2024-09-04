@@ -16,6 +16,6 @@ public class CustomErrorController implements ErrorController {
 	
 	@RequestMapping(value="/error", method={RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<?> Error(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return JsonResult.fail("오류 입니다.");
+		return JsonResult.fail("요청 URL이 잘못되었습니다.");
 	}
 }
