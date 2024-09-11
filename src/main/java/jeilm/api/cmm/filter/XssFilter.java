@@ -25,10 +25,6 @@ public class XssFilter implements Filter {
 		
 		if (path.startsWith("/assets/") || path.startsWith("/css/") || path.startsWith("/js/") || path.startsWith("/images/") || path.startsWith("/file/")) {
 			chain.doFilter(request, response);
-		} else if (path.startsWith("/board/")) {
-			chain.doFilter(request, response);	
-		} else if (path.startsWith("/history/")) {
-			chain.doFilter(request, response);	
 		} else {
 			if (log.isDebugEnabled()) {
 				log.debug("XssFilter doFilter : " + ((HttpServletRequest)request).getRequestURI());

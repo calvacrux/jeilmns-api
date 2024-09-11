@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.popup.service.mapper.PopupMapper">
+	
+	<select id="selectPopupList" resultType="jeilm.api.app.popup.vo.PopupVO">
+		<![CDATA[
+			/* selectPopupList */
+			SELECT
+				A.POPUP_SN
+				, A.POPUP_TITLE
+				, A.POPUP_CONTENT
+				, A.POPUP_WIDTH
+				, A.POPUP_HEIGHT
+			FROM
+				TB_POPUP A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+			ORDER BY
+				A.POPUP_SN DESC
+		]]>
+	</select>
+
+</mapper>

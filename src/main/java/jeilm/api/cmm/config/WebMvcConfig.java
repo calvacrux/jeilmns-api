@@ -22,7 +22,6 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import jeilm.api.cmm.filter.XssFilter;
 import jeilm.api.cmm.interceptor.CommonInterceptor;
 import jeilm.api.cmm.secure.XssJacksonDeserializer;
-import jeilm.api.cmm.secure.XssJacksonSerializer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -49,7 +48,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	/**
 	 * XSS 필터 설정
 	 * @return
-	 */
+	*/ 
 	@Bean
 	FilterRegistrationBean<XssFilter> xssFilter() {
 		FilterRegistrationBean<XssFilter> registrationBean = new FilterRegistrationBean<XssFilter>();
@@ -60,9 +59,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		return registrationBean;
 	}
 	
+	
 	/**
 	 * JSON XSS 설정
-	 */
+	*/
 	@Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 		MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
@@ -79,8 +79,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	    	    	    
 	    SimpleModule simpleModule = new SimpleModule();
 	    
-	    //XSS
-	    simpleModule.addSerializer(String.class, new XssJacksonSerializer());
+	    // XSS - Json으로 HTML 리턴해야 하므로 임시로 막음
+	    // simpleModule.addSerializer(String.class, new XssJacksonSerializer());
 	    simpleModule.addDeserializer(String.class, new XssJacksonDeserializer());
 	    
 	    objectMapper.registerModule(simpleModule).registerModule(new ParameterNamesModule());
