@@ -19,6 +19,7 @@ public class NewsBoardDetailVO implements Serializable {
 	private String post_title;					// 포스트 제목
 	private String post_content;				// 포스트 내용
 	private int view_cnt;						// 포스트 뷰카운트
+	private String link_url;					// 링크 URL
 	private String reg_dt;						// 등록일시
 	
 	// 파일 - 본문
