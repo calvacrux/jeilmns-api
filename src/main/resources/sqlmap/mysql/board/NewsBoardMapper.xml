@@ -23,6 +23,7 @@
 				INNER JOIN TB_CODE B ON (B.CODE_ID = A.POST_CAT)
 			WHERE
 				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
 				AND B.USE_STATE = 'Y'
 				AND A.POST_SN = #{post_sn}
 		]]>
@@ -47,6 +48,7 @@
 				INNER JOIN TB_CODE B ON (B.CODE_ID = A.POST_CAT)
 			WHERE
 				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
 				AND B.USE_STATE = 'Y'
 				AND A.BOARD_ID = #{board_id}
 		]]>
@@ -77,6 +79,7 @@
 				INNER JOIN TB_CODE B ON (B.CODE_ID = A.POST_CAT)
 			WHERE
 				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
 				AND B.USE_STATE = 'Y'
 				AND A.BOARD_ID = #{board_id}
 		]]>
