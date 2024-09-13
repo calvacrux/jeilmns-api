@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.board.service.mapper.InvestBoardMapper">
+
+	<select id="selectPost" resultType="jeilm.api.app.board.vo.InvestBoardDetailVO">
+		<![CDATA[
+			/* selectPost */
+			SELECT
+				A.POST_SN
+				, A.POST_TITLE
+				, A.POST_CONTENT
+				, A.VIEW_CNT
+				, A.LINK_URL
+				, A.REG_DT
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'body') AS FILE_USER_NM_BODY
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'body') AS FILE_PATH_BODY
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'attach') AS FILE_USER_NM_ATTACH
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'attach') AS FILE_PATH_ATTACH
+			FROM
+				TB_BOARD_POST A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND A.POST_SN = #{post_sn}
+		]]>
+	</select>
+	
+	<select id="selectPostList" resultType="jeilm.api.app.board.vo.InvestBoardListVO">
+		<![CDATA[
+			/* selectPostList */
+			SELECT
+				A.POST_SN
+				, A.POST_TITLE
+				, A.VIEW_CNT
+				, A.REG_DT
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_USER_NM_THUMB
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_PATH_THUMB
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'attach') AS FILE_USER_NM_ATTACH
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'attach') AS FILE_PATH_ATTACH
+			FROM
+				TB_BOARD_POST A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND A.BOARD_ID = #{board_id}
+		]]>
+			<if test='search_text != null and !search_text.equals("")'>
+				AND (A.POST_TITLE LIKE CONCAT('%', #{search_text}, '%') OR A.POST_CONTENT LIKE CONCAT('%', #{search_text}, '%')) 
+			</if>
+		<![CDATA[
+			ORDER BY
+				A.POST_SN DESC
+			LIMIT 
+				#{page_size} OFFSET #{page_offset}
+		]]>
+	</select>
+	
+	<select id="selectPostCount" resultType="int">
+		<![CDATA[
+			/* selectPostCount */
+			SELECT
+				COUNT(*) CNT
+			FROM
+				TB_BOARD_POST A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND A.BOARD_ID = #{board_id}
+		]]>
+			<if test='search_text != null and !search_text.equals("")'>
+				AND (A.POST_TITLE LIKE CONCAT('%', #{search_text}, '%') OR A.POST_CONTENT LIKE CONCAT('%', #{search_text}, '%')) 
+			</if>
+	</select>
+	
+	<update id="updateViewCount">
+		<![CDATA[
+			/* updateViewCount */
+			UPDATE
+				TB_BOARD_POST
+			SET
+				VIEW_CNT = VIEW_CNT + 1
+			WHERE
+				POST_SN = #{post_sn}
+		]]>	
+	</update>
+
+</mapper>
