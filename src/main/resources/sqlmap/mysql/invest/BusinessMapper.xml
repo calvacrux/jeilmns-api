@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.invest.service.mapper.BusinessMapper">
+	
+	<select id="selectPostList" resultType="jeilm.api.app.invest.vo.BusinessVO">
+		<![CDATA[
+			/* selectPostList */
+			SELECT
+				A.POST_SN
+				, A.POST_TITLE
+				, A.REG_DT
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_USER_NM_MAIN
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_PATH_MAIN
+			FROM
+				TB_BOARD_POST A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND A.BOARD_ID = #{board_id}
+			ORDER BY
+				A.POST_SN DESC
+			LIMIT 
+				#{page_size} OFFSET #{page_offset}
+		]]>
+	</select>
+	
+	<select id="selectPostCount" resultType="int">
+		<![CDATA[
+			/* selectPostCount */
+			SELECT
+				COUNT(*) CNT
+			FROM
+				TB_BOARD_POST A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND A.BOARD_ID = #{board_id}
+		]]>
+	</select>
+
+</mapper>
