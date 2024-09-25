@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jeilm.api.app.file.vo.DownFileVO;
 import jeilm.api.app.invest.service.InformationService;
 import jeilm.api.app.invest.vo.InformationVO;
 import jeilm.api.cmm.json.JsonResult;
@@ -62,5 +63,35 @@ public class InformationController {
 		map.put("paging", pagingVO);
 		
 		return JsonResult.success(map);		
+	}
+	
+	/**
+	 * 공시정보관리규정 파일
+	 * @param informationVO
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/v1/invest/information/downfile")
+	public ResponseEntity<?> getInvestInformationDownFile(@RequestBody InformationVO informationVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 게시판 아이디
+		if (informationVO.getLang().equals("ko")) {
+			informationVO.setBoard_id("information.ko");
+		} else if (informationVO.getLang().equals("en")) {
+			informationVO.setBoard_id("information.en");
+		} else if (informationVO.getLang().equals("cn")) {
+			informationVO.setBoard_id("information.cn");
+		} else {
+			return JsonResult.fail("언어설정이 올바르지 않습니다.");
+		}
+		
+		DownFileVO result = informationService.selectTopFile(informationVO);
+		
+		map.put("info", result);
+		
+		return JsonResult.success(map);	
 	}
 }

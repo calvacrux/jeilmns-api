@@ -39,4 +39,23 @@
 		]]>
 	</select>
 
+	<select id="selectTopFile" resultType="jeilm.api.app.file.vo.DownFileVO">
+		<![CDATA[
+			/* selectTopFile */
+			SELECT
+				(SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_NAME
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_PATH
+			FROM
+				TB_BOARD_POST A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND A.BOARD_ID = #{board_id}
+			ORDER BY
+				A.POST_SN DESC
+			LIMIT 
+				1
+		]]>
+	</select>
+
 </mapper>

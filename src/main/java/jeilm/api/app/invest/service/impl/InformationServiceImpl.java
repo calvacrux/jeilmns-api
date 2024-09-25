@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import jeilm.api.app.file.vo.DownFileVO;
 import jeilm.api.app.invest.service.InformationService;
 import jeilm.api.app.invest.service.mapper.InformationMapper;
 import jeilm.api.app.invest.vo.InformationVO;
@@ -23,6 +24,11 @@ public class InformationServiceImpl implements InformationService {
 	@Override
 	public int selectPostCount(InformationVO informationVO) throws Exception {
 		return informationMapper.selectPostCount(informationVO);
+	}
+
+	@Override
+	public DownFileVO selectTopFile(InformationVO informationVO) throws Exception {
+		return informationMapper.selectTopFile(informationVO);
 	}
 
 }
