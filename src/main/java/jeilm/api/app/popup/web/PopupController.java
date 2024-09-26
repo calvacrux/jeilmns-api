@@ -26,6 +26,17 @@ public class PopupController {
 	public ResponseEntity<?> getPopupList(@RequestBody PopupVO popupVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		// 팝업 아이디
+		if (popupVO.getLang().equals("ko")) {
+			popupVO.setPopup_id("popup.ko");
+		} else if (popupVO.getLang().equals("en")) {
+			popupVO.setPopup_id("popup.en");
+		} else if (popupVO.getLang().equals("cn")) {
+			popupVO.setPopup_id("popup.cn");
+		} else {
+			return JsonResult.fail("언어설정이 올바르지 않습니다.");
+		}
+		
 		List<PopupVO> resultList = popupService.selectPopupList(popupVO);
 		
 		map.put("popup_list", resultList);

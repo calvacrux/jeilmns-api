@@ -3,6 +3,8 @@ package jeilm.api.app.popup.vo;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jeilm.api.cmm.constant.AppConstant;
 import lombok.Data;
@@ -14,6 +16,10 @@ public class PopupVO implements Serializable {
 	
 	// 기본
 	private String popup_sn;				// 팝업 번호
+	@JsonIgnore
+	private String popup_id;				// 팝업 아이디
+	private String popup_cat;				// 팝업 카테고리 코드
+	private String popup_cat_nm;			// 팝업 카테고리 이름
 	private String popup_title;				// 팝업 제목
 	private String popup_content;			// 팝업 내용
 	private int popup_width;				// 팝업 넓이
@@ -35,5 +41,9 @@ public class PopupVO implements Serializable {
 			return AppConstant.storagePath.concat(file_path_body);
 		}
 	}
+	
+	// 요청
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private String lang;						// 언어(ko, en, cn)
 	
 }
