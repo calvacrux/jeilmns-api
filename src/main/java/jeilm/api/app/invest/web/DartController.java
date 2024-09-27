@@ -3,6 +3,7 @@ package jeilm.api.app.invest.web;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -49,7 +50,36 @@ public class DartController {
 	 * @throws Exception
 	 */
 	@PostMapping("/v1/invest/dart/list")
-	public ResponseEntity<?> getDartReportList (@RequestBody DartVO dartVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ResponseEntity<?> getDartReportList (@RequestBody Map<String, Object> params,  HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String end_de = LocalDate.now().format( DateTimeFormatter.BASIC_ISO_DATE);
+		
+		URI dartReportUri = URI.create(url_report 
+				+ "?crtfc_key=" + crtfc_key 
+				+ "&corp_code=" + corp_code 
+				+ "&corp_cls=" + corp_cls 
+				+ "&bgn_de=" + bgn_de 
+				+ "&end_de=" + end_de
+				+ "&page_no=" + (int)params.get("page_no")
+				+ "&page_count=" + (int)params.get("page_count"));
+		
+		final HttpHeaders httpHeaders= new HttpHeaders();
+	    httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		
+		return new ResponseEntity<>(dartReportClient.getDartReportClient(dartReportUri), httpHeaders, HttpStatus.OK);
+		
+	}
+	
+	/**
+	 * 공시정보 리스트 - Dart - 객체로 받기
+	 * @param dartVO
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/v1/invest/dart/list-vo")
+	public ResponseEntity<?> getDartReportListVO (@RequestBody DartVO dartVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String end_de = LocalDate.now().format( DateTimeFormatter.BASIC_ISO_DATE);
 		
