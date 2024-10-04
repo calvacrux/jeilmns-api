@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.career.service.mapper.CareerApplyMapper">
+
+	<select id="selectCareerApplyFileList" resultType="jeilm.api.app.mail.vo.MailAttachFileVO">
+		<![CDATA[
+			/* selectCareerApplyFileList*/
+			SELECT
+				A.FILE_USER_NM
+				, A.FILE_PATH
+			FROM
+				TB_FILE A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.FILE_DATA_SN = #{apply_sn}
+		]]>
+	</select>
+	
+	<insert id="insertCareerApply" useGeneratedKeys="true" keyProperty="apply_sn" keyColumn="apply_sn">
+		<selectKey resultType="string" keyProperty="apply_sn" order="BEFORE">
+            <![CDATA[
+            	SELECT CONCAT('CA', FN_NEXTVAL('CAREER_APPLY_SN_SEQ')) APPLY_SN FROM DUAL
+            ]]>
+        </selectKey>
+        <![CDATA[
+        	/* insertCareerApply */
+        	INSERT INTO TB_CAREER_APPLY
+        		(APPLY_SN, POSITION_SN, APPLY_NM, APPLY_TEL, APPLY_MAIL, APPLY_CONTENT)
+        	VALUES
+				(#{apply_sn}, #{position_sn}, #{apply_nm}, #{apply_tel}, #{apply_mail}, #{apply_content})   
+        ]]>	
+	</insert>
+	
+	<update id="deleteCareerApply">
+		<![CDATA[
+			/* deleteCareerApply */
+			UPDATE
+				TB_CAREER_APPLY
+			SET
+				USE_STATE = 'N'
+				, EDT_SN = #{edt_sn}
+				, EDT_DT = SYSDATE()
+			WHERE
+				APPLY_SN = #{apply_sn}
+		]]>	
+	</update>
+
+</mapper>

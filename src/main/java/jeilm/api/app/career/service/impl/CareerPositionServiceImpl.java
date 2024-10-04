@@ -16,6 +16,11 @@ public class CareerPositionServiceImpl implements CareerPositionService {
 	private final CareerPositionMapper careerPositionMapper;
 
 	@Override
+	public CareerPositionVO selectPosition(CareerPositionVO careerPositionVO) throws Exception {
+		return careerPositionMapper.selectPosition(careerPositionVO);
+	}
+	
+	@Override
 	public List<CareerPositionVO> selectPositionList(CareerPositionVO careerPositionVO) throws Exception {
 		return careerPositionMapper.selectPositionList(careerPositionVO);
 	}

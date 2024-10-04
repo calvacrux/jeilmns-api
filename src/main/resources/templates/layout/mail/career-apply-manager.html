@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>채용정보 지원메일</title>
+</head>
+<body>
+<div>
+	<h1 style="font-size: 22px; line-height: 160%;">
+		채용지원 접수안내
+	</h1>
+	<p style="font-size: 14px; line-height: 160%;">
+		제일엠앤에스 홈페이지에서 채용지원이 접수되었습니다.
+		<br>		
+		관리자 채용지원 관리에서도 확인할 수 있으며 검토여부가 완료되면 검토여부를 업데이트 바랍니다.
+	</p>
+	<p style="font-size: 14px; line-height: 160%;">
+		* 지원직무: <span th:text="${positoin_cat_nm}"></span>
+		<br>
+		* 이름: <span th:text="${apply_nm}"></span>
+		<br>
+		* 전화: <span th:text="${apply_tel}"></span>
+		<br>
+		* 메일: <span th:text="${apply_mail}"></span>
+		<br>
+		* 지원개요:
+		<br> 
+		<span th:utext="${apply_content}"></span>
+		<br>
+		* 지원일자: <span th:text="${reg_dt}"></span>
+	</p>
+	<hr>
+	<p style="font-size: 12px; line-height: 160%;">
+		2024 © 제일엠앤에스
+	</p>
+</div>
+</body>
+</html>
