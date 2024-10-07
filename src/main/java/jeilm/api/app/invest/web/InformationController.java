@@ -24,7 +24,7 @@ public class InformationController {
 	private final InformationService informationService;
 	
 	/**
-	 * IR 게시판 리스트
+	 * 공시정보관리규정 리스트
 	 * @param informationVO
 	 * @param request
 	 * @param response
