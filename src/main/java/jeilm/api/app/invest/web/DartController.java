@@ -52,7 +52,7 @@ public class DartController {
 	@PostMapping("/v1/invest/dart/list")
 	public ResponseEntity<?> getDartReportList (@RequestBody Map<String, Object> params,  HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String end_de = LocalDate.now().format( DateTimeFormatter.BASIC_ISO_DATE);
+		String end_de = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
 		
 		URI dartReportUri = URI.create(url_report 
 				+ "?crtfc_key=" + crtfc_key 
@@ -81,7 +81,7 @@ public class DartController {
 	@PostMapping("/v1/invest/dart/list-vo")
 	public ResponseEntity<?> getDartReportListVO (@RequestBody DartVO dartVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String end_de = LocalDate.now().format( DateTimeFormatter.BASIC_ISO_DATE);
+		String end_de = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
 		
 		URI dartReportUri = URI.create(url_report 
 				+ "?crtfc_key=" + crtfc_key 
