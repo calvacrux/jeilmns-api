@@ -3,6 +3,8 @@ package jeilm.api.app.board.vo;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jeilm.api.cmm.constant.AppConstant;
 import lombok.Data;
@@ -53,5 +55,15 @@ public class NewsBoardDetailVO implements Serializable {
 			return AppConstant.storagePath.concat(file_path_attach);
 		}
 	}
+	
+	// 요청
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private String lang;						// 언어(ko, en, cn)
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private String[] post_cat_list;				// 포스트 카테고리 리스트
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private String search_text;					// 검색 단어
 
 }

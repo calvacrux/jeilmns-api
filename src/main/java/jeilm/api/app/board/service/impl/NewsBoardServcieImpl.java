@@ -8,6 +8,8 @@ import jeilm.api.app.board.service.NewsBoardService;
 import jeilm.api.app.board.service.mapper.NewsBoardMapper;
 import jeilm.api.app.board.vo.NewsBoardDetailVO;
 import jeilm.api.app.board.vo.NewsBoardListVO;
+import jeilm.api.app.board.vo.NewsBoardNextVO;
+import jeilm.api.app.board.vo.NewsBoardPrevVO;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -19,6 +21,16 @@ public class NewsBoardServcieImpl implements NewsBoardService {
 	@Override
 	public NewsBoardDetailVO selectPost(NewsBoardDetailVO newsBoardDetailVO) throws Exception {
 		return newsBoardMapper.selectPost(newsBoardDetailVO);
+	}
+	
+	@Override
+	public NewsBoardPrevVO selectPostPrev(NewsBoardPrevVO newsBoardPrevVO) throws Exception {
+		return newsBoardMapper.selectPostPrev(newsBoardPrevVO);
+	}
+
+	@Override
+	public NewsBoardNextVO selectPostNext(NewsBoardNextVO newsBoardNextVO) throws Exception {
+		return newsBoardMapper.selectPostNext(newsBoardNextVO);
 	}
 
 	@Override

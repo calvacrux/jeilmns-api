@@ -30,6 +30,72 @@
 		]]>
 	</select>
 	
+	<select id="selectPostPrev" resultType="jeilm.api.app.board.vo.NewsBoardPrevVO">
+		<![CDATA[
+			/* selectPostPrev */
+			SELECT
+				A.POST_SN AS PREV_POST_SN
+				, A.POST_TITLE AS PREV_POST_TITLE	
+			FROM
+				TB_BOARD_POST A
+				INNER JOIN TB_CODE B ON (B.CODE_ID = A.POST_CAT)
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND B.USE_STATE = 'Y'
+				AND A.BOARD_ID = #{board_id}
+				AND A.POST_SN > #{post_sn}
+		]]>
+			<if test='post_cat_list != null and post_cat_list.length != 0'>
+				AND A.POST_CAT IN 
+				<foreach item="item" collection="post_cat_list" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test='search_text != null and !search_text.equals("")'>
+				AND (A.POST_TITLE LIKE CONCAT('%', #{search_text}, '%') OR A.POST_CONTENT LIKE CONCAT('%', #{search_text}, '%')) 
+			</if>
+		<![CDATA[
+			ORDER BY
+				A.POST_SN ASC
+			LIMIT 
+				1
+		]]>
+	</select>
+	
+	<select id="selectPostNext" resultType="jeilm.api.app.board.vo.NewsBoardNextVO">
+		<![CDATA[
+			/* selectPostNext */
+			SELECT
+				A.POST_SN AS NEXT_POST_SN
+				, A.POST_TITLE AS NEXT_POST_TITLE	
+			FROM
+				TB_BOARD_POST A
+				INNER JOIN TB_CODE B ON (B.CODE_ID = A.POST_CAT)
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND B.USE_STATE = 'Y'
+				AND A.BOARD_ID = #{board_id}
+				AND A.POST_SN < #{post_sn}
+		]]>
+			<if test='post_cat_list != null and post_cat_list.length != 0'>
+				AND A.POST_CAT IN 
+				<foreach item="item" collection="post_cat_list" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test='search_text != null and !search_text.equals("")'>
+				AND (A.POST_TITLE LIKE CONCAT('%', #{search_text}, '%') OR A.POST_CONTENT LIKE CONCAT('%', #{search_text}, '%')) 
+			</if>
+		<![CDATA[
+			ORDER BY
+				A.POST_SN DESC
+			LIMIT 
+				1
+		]]>
+	</select>
+	
 	<select id="selectPostList" resultType="jeilm.api.app.board.vo.NewsBoardListVO">
 		<![CDATA[
 			/* selectPostList */

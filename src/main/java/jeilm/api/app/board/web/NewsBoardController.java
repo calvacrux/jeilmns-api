@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jeilm.api.app.board.service.NewsBoardService;
 import jeilm.api.app.board.vo.NewsBoardDetailVO;
 import jeilm.api.app.board.vo.NewsBoardListVO;
+import jeilm.api.app.board.vo.NewsBoardNextVO;
+import jeilm.api.app.board.vo.NewsBoardPrevVO;
 import jeilm.api.cmm.json.JsonResult;
 import lombok.RequiredArgsConstructor;
 
@@ -74,6 +76,35 @@ public class NewsBoardController {
 		// result.setPost_title(StringUtil.str2html(result.getPost_title()));
 		// result.setPost_content(StringUtil.str2html(result.getPost_content()));
 		
+		// 이전글/다음글
+		NewsBoardPrevVO result_prev = new NewsBoardPrevVO();
+		NewsBoardNextVO result_next = new NewsBoardNextVO();
+		
+		if (newsBoardDetailVO.getLang().equals("ko")) {
+			result_prev.setBoard_id("news.ko");
+			result_next.setBoard_id("news.ko");
+		} else if (newsBoardDetailVO.getLang().equals("en")) {
+			result_prev.setBoard_id("news.en");
+			result_next.setBoard_id("news.en");
+		} else if (newsBoardDetailVO.getLang().equals("cn")) {
+			result_prev.setBoard_id("news.cn");
+			result_next.setBoard_id("news.cn");
+		} else {
+			return JsonResult.fail("언어설정이 올바르지 않습니다.");
+		}
+		
+		
+		result_prev.setPost_sn(newsBoardDetailVO.getPost_sn());
+		result_prev.setPost_cat_list(newsBoardDetailVO.getPost_cat_list());
+		result_prev.setSearch_text(newsBoardDetailVO.getSearch_text());
+		
+		result_next.setPost_sn(newsBoardDetailVO.getPost_sn());
+		result_next.setPost_cat_list(newsBoardDetailVO.getPost_cat_list());
+		result_next.setSearch_text(newsBoardDetailVO.getSearch_text());
+		
+		result_prev = newsBoardService.selectPostPrev(result_prev);
+		result_next = newsBoardService.selectPostNext(result_next);
+				
 		//조회수 증가 - 쿠키를 이용한 조회수 증가 방지
 		Cookie[] cookies = request.getCookies();
 		Cookie newCookie = null;
@@ -113,7 +144,9 @@ public class NewsBoardController {
 		}
 		
 		map.put("post", result);
-		
+		map.put("post_prev", result_prev);
+		map.put("post_next", result_next);
+				
 		return JsonResult.success(map);	
 	}
 

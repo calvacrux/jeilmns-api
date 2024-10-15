@@ -2,8 +2,10 @@ package jeilm.api.app.board.service;
 
 import java.util.List;
 
-import jeilm.api.app.board.vo.NewsBoardListVO;
 import jeilm.api.app.board.vo.NewsBoardDetailVO;
+import jeilm.api.app.board.vo.NewsBoardListVO;
+import jeilm.api.app.board.vo.NewsBoardNextVO;
+import jeilm.api.app.board.vo.NewsBoardPrevVO;
 
 public interface NewsBoardService {
 
@@ -14,6 +16,22 @@ public interface NewsBoardService {
 	 * @throws Exception
 	 */
 	NewsBoardDetailVO selectPost(NewsBoardDetailVO newsBoardDetailVO) throws Exception;
+	
+	/**
+	 * 포스트 상세 조회 - 이전
+	 * @param newsBoardPrevVO
+	 * @return
+	 * @throws Exception
+	 */
+	NewsBoardPrevVO selectPostPrev(NewsBoardPrevVO newsBoardPrevVO) throws Exception;
+	
+	/**
+	 * 포스트 상세 조회 - 다음
+	 * @param newsBoardNextVO
+	 * @return
+	 * @throws Exception
+	 */
+	NewsBoardNextVO selectPostNext(NewsBoardNextVO newsBoardNextVO) throws Exception;
 	
 	/**
 	 * 포스트 리스트 조회
