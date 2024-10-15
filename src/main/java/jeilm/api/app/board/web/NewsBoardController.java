@@ -68,6 +68,14 @@ public class NewsBoardController {
 		return JsonResult.success(map);		
 	}
 	
+	/**
+	 * 뉴스 게시판 상세
+	 * @param newsBoardDetailVO
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping("/v1/newsboard/view")
 	public ResponseEntity<?> getNewsBoardPost(@RequestBody NewsBoardDetailVO newsBoardDetailVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
