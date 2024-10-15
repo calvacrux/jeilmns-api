@@ -26,7 +26,6 @@ public class AuditVO implements Serializable {
 		private int page_offset = 0;				// 페이지 오프셋 (page_index - 1) * page_size
 		
 		// 파일 - 메인
-		@JsonIgnore
 		private String file_user_nm_main;			// 메인 파일 이름
 		@JsonIgnore
 		private String file_path_main;				// 메인 파일 경로

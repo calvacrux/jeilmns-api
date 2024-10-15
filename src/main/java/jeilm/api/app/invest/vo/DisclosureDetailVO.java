@@ -23,7 +23,6 @@ public class DisclosureDetailVO implements Serializable {
 		private String reg_dt;						// 등록일시
 		
 		// 파일 - 메인
-		@JsonIgnore
 		private String file_user_nm_main;			// 메인 파일 이름
 		@JsonIgnore
 		private String file_path_main;				// 메인 파일 경로

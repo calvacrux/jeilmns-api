@@ -41,7 +41,6 @@ public class NewsBoardDetailVO implements Serializable {
 	}
 	
 	// 파일 - 첨부
-	@JsonIgnore
 	private String file_user_nm_attach;			// 첨부 파일 이름
 	@JsonIgnore
 	private String file_path_attach;			// 첨부 파일 경로
