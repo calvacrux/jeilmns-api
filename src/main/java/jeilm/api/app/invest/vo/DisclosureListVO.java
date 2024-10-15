@@ -10,7 +10,7 @@ import jeilm.api.cmm.constant.AppConstant;
 import lombok.Data;
 
 @Data
-public class DisclosureVO implements Serializable {
+public class DisclosureListVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

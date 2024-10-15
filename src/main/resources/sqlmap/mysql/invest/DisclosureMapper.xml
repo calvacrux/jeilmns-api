@@ -3,7 +3,7 @@
 
 <mapper namespace="jeilm.api.app.invest.service.mapper.DisclosureMapper">
 	
-	<select id="selectPostList" resultType="jeilm.api.app.invest.vo.DisclosureVO">
+	<select id="selectPostList" resultType="jeilm.api.app.invest.vo.DisclosureListVO">
 		<![CDATA[
 			/* selectPostList */
 			SELECT
