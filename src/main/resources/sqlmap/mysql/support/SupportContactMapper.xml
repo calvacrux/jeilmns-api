@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.support.service.mapper.SupportContactMapper">
+
+	<select id="selectSupportContactList" resultType="jeilm.api.app.support.vo.SupportContactVO">
+		<![CDATA[
+			/* selectSupportContactList */
+			SELECT
+				A.CONTACT_CAT
+				, A.CONTACT_NM
+				, A.CONTACT_TEL
+				, A.CONTACT_MAIL
+			FROM
+				TB_SUPPORT_CONTACT A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.CONTACT_ID = #{contact_id}
+			ORDER BY
+				A.DISPLAY_YN DESC, A.SORT_NO ASC
+		]]>
+	</select>
+
+</mapper>
