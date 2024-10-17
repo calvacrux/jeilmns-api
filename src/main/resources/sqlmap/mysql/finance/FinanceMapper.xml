@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.finance.service.mapper.FinanceMapper">
+	
+	<select id="selectFinanceList" resultType="jeilm.api.app.finance.vo.FinanceVO">
+		<![CDATA[
+			/* selectFinanceList */
+			SELECT
+				A.FINANCE_SN
+				, A.FINANCE_YEAR
+				, A.ASSET_TOTAL
+				, A.ASSET_CURRENT
+				, A.ASSET_CURRENT_NON
+				, A.DEBT_TOTAL
+				, A.DEBT_CURRENT
+				, A.DEBT_CURRENT_NON
+				, A.CAPITAL_TOTAL
+				, A.CAPITAL_INVEST
+				, A.GAIN_LOSS_OTHER_TOTAL
+				, A.CAPITAL_OTHER
+			FROM
+				TB_FINANCE A
+				INNER JOIN TB_ADM B ON (B.ADM_SN = A.REG_SN)
+			WHERE
+				A.USE_STATE = 'Y'
+				AND B.USE_STATE = 'Y'
+			ORDER BY
+				A.FINANCE_YEAR DESC
+			LIMIT 
+				3
+		]]>
+	</select>
+	
+</mapper>
