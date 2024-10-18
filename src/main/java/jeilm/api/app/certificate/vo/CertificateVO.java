@@ -16,6 +16,7 @@ public class CertificateVO implements Serializable {
 	
 	// 기본
 	private String certificate_title;			// 인증서 제목
+	private String certificate_desc;			// 인증서 설명
 	
 	// 파일 - 썸네일
 	@JsonIgnore
