@@ -1,6 +1,5 @@
 package jeilm.api.app.certificate.web;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,18 +34,18 @@ public class CertificateController {
 	public ResponseEntity<?> getHistoryList(@RequestBody CertificateVO certificateVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		certificateVO.setLang(certificateVO.getLang());
-		List<CertificateVO> resultList = new ArrayList<CertificateVO>();
-		
+		// 아이디
 		if (certificateVO.getLang().equals("ko")) {
-			resultList = certificateService.selectCertificateListKo(certificateVO);
+			certificateVO.setCertificate_id("cert.ko");
 		} else if (certificateVO.getLang().equals("en")) {
-			resultList = certificateService.selectCertificateListEn(certificateVO);
+			certificateVO.setCertificate_id("cert.en");
 		} else if (certificateVO.getLang().equals("cn")) {
-			resultList = certificateService.selectCertificateListCn(certificateVO);
+			certificateVO.setCertificate_id("cert.cn");
 		} else {
 			return JsonResult.fail("언어설정이 올바르지 않습니다.");
 		}
+		
+		List<CertificateVO> resultList = certificateService.selectCertificateList(certificateVO);
 		
 		map.put("certificate_list", resultList);
 		

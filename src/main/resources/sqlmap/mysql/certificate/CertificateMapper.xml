@@ -3,60 +3,35 @@
 
 <mapper namespace="jeilm.api.app.certificate.service.mapper.CertificateMapper">
 
-	<select id="selectCertificateListKo" resultType="jeilm.api.app.certificate.vo.CertificateVO">
+	<select id="selectCertificateList" resultType="jeilm.api.app.certificate.vo.CertificateVO">
 		<![CDATA[
-			/* selectCertificateListKo */
+			/* selectCertificateList */
 			SELECT
-				A.CERTIFICATE_TITLE_KO AS CERTIFICATE_TITLE 
-				, A.CERTIFICATE_DESC_KO AS CERTIFICATE_DESC 
+				A.CERTIFICATE_CAT
+				, B.CODE_NM AS CERTIFICATE_CAT_NM
+				, A.CERTIFICATE_TITLE 
+				, A.CERTIFICATE_DESC 
 				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_USER_NM_THUMB
 				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_PATH_THUMB
 				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_USER_NM_MAIN
 				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_PATH_MAIN
 			FROM
 				TB_CERTIFICATE A
+				INNER JOIN TB_CODE B ON (B.CODE_ID = A.CERTIFICATE_CAT)
 			WHERE
 				A.USE_STATE = 'Y'
-			ORDER BY
-				A.CERTIFICATE_SORT ASC
+				AND B.USE_STATE = 'Y'
+				AND A.CERTIFICATE_ID = #{certificate_id}
 		]]>
-	</select>
-	
-	<select id="selectCertificateListEn" resultType="jeilm.api.app.certificate.vo.CertificateVO">
+			<if test='certificate_cat_list != null and certificate_cat_list.length != 0'>
+				AND A.CERTIFICATE_CAT IN 
+				<foreach item="item" collection="certificate_cat_list" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
 		<![CDATA[
-			/* selectCertificateListEn */
-			SELECT
-				A.CERTIFICATE_TITLE_EN AS CERTIFICATE_TITLE
-				, A.CERTIFICATE_DESC_EN AS CERTIFICATE_DESC 
-				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_USER_NM_THUMB
-				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_PATH_THUMB
-				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_USER_NM_MAIN
-				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_PATH_MAIN
-			FROM
-				TB_CERTIFICATE A
-			WHERE
-				A.USE_STATE = 'Y'
 			ORDER BY
-				A.CERTIFICATE_SORT ASC
-		]]>
-	</select>
-	
-	<select id="selectCertificateListCn" resultType="jeilm.api.app.certificate.vo.CertificateVO">
-		<![CDATA[
-			/* selectCertificateListCn */
-			SELECT
-				A.CERTIFICATE_TITLE_CN AS CERTIFICATE_TITLE 
-				, A.CERTIFICATE_DESC_CN AS CERTIFICATE_DESC
-				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_USER_NM_THUMB
-				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_PATH_THUMB
-				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_USER_NM_MAIN
-				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_PATH_MAIN
-			FROM
-				TB_CERTIFICATE A
-			WHERE
-				A.USE_STATE = 'Y'
-			ORDER BY
-				A.CERTIFICATE_SORT ASC
+				A.SORT_NO ASC
 		]]>
 	</select>
 	

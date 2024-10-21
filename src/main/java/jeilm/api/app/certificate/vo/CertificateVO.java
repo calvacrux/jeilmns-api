@@ -15,6 +15,10 @@ public class CertificateVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	// 기본
+	@JsonIgnore
+	private String certificate_id;				// 인증서 아이디
+	private String certificate_cat;				// 인증서 카테고리
+	private String certificate_cat_nm;			// 인증서 카테고리 이름
 	private String certificate_title;			// 인증서 제목
 	private String certificate_desc;			// 인증서 설명
 	
@@ -53,5 +57,8 @@ public class CertificateVO implements Serializable {
 	// 요청
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String lang;						// 언어(ko, en, cn)
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private String[] certificate_cat_list;		// 인증서 카테고리 리스트
 
 }

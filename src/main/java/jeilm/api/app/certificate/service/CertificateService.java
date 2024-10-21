@@ -7,28 +7,11 @@ import jeilm.api.app.certificate.vo.CertificateVO;
 public interface CertificateService {
 
 	/**
-	 * 인증서 리스트 조회 - Ko
+	 * 인증서 리스트 조회
 	 * @param certificateVO
 	 * @return
 	 * @throws Exception
 	 */
-	List<CertificateVO> selectCertificateListKo(CertificateVO certificateVO) throws Exception;
-	
-	/**
-	 * 인증서 리스트 조회 - En
-	 * @param certificateVO
-	 * @return
-	 * @throws Exception
-	 */
-	List<CertificateVO> selectCertificateListEn(CertificateVO certificateVO) throws Exception;
-	
-	/**
-	 * 인증서 리스트 조회 - Cn
-	 * @param certificateVO
-	 * @return
-	 * @throws Exception
-	 */
-	List<CertificateVO> selectCertificateListCn(CertificateVO certificateVO) throws Exception;
-	
+	List<CertificateVO> selectCertificateList(CertificateVO certificateVO) throws Exception;
 	
 }

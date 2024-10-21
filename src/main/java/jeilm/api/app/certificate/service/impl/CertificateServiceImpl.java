@@ -16,18 +16,8 @@ public class CertificateServiceImpl implements CertificateService {
 	private final CertificateMapper certificateMapper;
 
 	@Override
-	public List<CertificateVO> selectCertificateListKo(CertificateVO certificateVO) throws Exception {
-		return certificateMapper.selectCertificateListKo(certificateVO);
-	}
-
-	@Override
-	public List<CertificateVO> selectCertificateListEn(CertificateVO certificateVO) throws Exception {
-		return certificateMapper.selectCertificateListEn(certificateVO);
-	}
-
-	@Override
-	public List<CertificateVO> selectCertificateListCn(CertificateVO certificateVO) throws Exception {
-		return certificateMapper.selectCertificateListCn(certificateVO);
+	public List<CertificateVO> selectCertificateList(CertificateVO certificateVO) throws Exception {
+		return certificateMapper.selectCertificateList(certificateVO);
 	}
 
 }
