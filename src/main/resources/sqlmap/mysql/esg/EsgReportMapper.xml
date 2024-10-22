@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.esg.service.mapper.EsgReportMapper">
+	
+	<select id="selectEsgReportList" resultType="jeilm.api.app.esg.vo.EsgReportVO">
+		<![CDATA[
+			/* selectEsgReportList */
+			SELECT
+				A.REPORT_CAT
+				, A.REPORT_OPEN_DAY
+				, A.REPORT_DESC
+				, A.REPORT_PASS
+			FROM
+				TB_ESG_REPORT A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.REPORT_ID = #{report_id}
+			ORDER BY
+				A.REPORT_SN DESC
+		]]>
+	</select>
+	
+</mapper>
