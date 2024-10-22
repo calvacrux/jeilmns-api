@@ -35,8 +35,8 @@
 			/* selectPostPrev */
 			SELECT
 				A.POST_CAT
-				, A.POST_SN AS PREV_POST_SN
-				, A.POST_TITLE AS PREV_POST_TITLE	
+				, A.POST_SN
+				, A.POST_TITLE	
 			FROM
 				TB_BOARD_POST A
 				INNER JOIN TB_CODE B ON (B.CODE_ID = A.POST_CAT)
@@ -72,8 +72,8 @@
 			/* selectPostNext */
 			SELECT
 				A.POST_CAT
-				, A.POST_SN AS NEXT_POST_SN
-				, A.POST_TITLE AS NEXT_POST_TITLE	
+				, A.POST_SN
+				, A.POST_TITLE	
 			FROM
 				TB_BOARD_POST A
 				INNER JOIN TB_CODE B ON (B.CODE_ID = A.POST_CAT)

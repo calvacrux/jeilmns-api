@@ -16,11 +16,9 @@ public class NewsBoardNextVO implements Serializable {
 	// 기본
 	@JsonIgnore
 	private String board_id;					// 게시판 아이디
-	@JsonIgnore
 	private String post_sn;						// 포스트 일련번호
 	private String post_cat;					// 포스트 카테고리
-	private String next_post_sn;	    		// 포스트 일련번호 - 다음
-	private String next_post_title;				// 포스트 제목 - 다음
+	private String post_title;					// 포스트 제목
 	
 	// 요청
 	@JsonProperty(access = Access.WRITE_ONLY)
