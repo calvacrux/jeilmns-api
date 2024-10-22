@@ -23,6 +23,9 @@
 				AND B.USE_STATE = 'Y'
 				AND A.CERTIFICATE_ID = #{certificate_id}
 		]]>
+			<if test='certificate_cat != null and !certificate_cat.equals("")'>
+				AND A.CERTIFICATE_CAT = #{certificate_cat} 
+			</if>
 			<if test='certificate_cat_list != null and certificate_cat_list.length != 0'>
 				AND A.CERTIFICATE_CAT IN 
 				<foreach item="item" collection="certificate_cat_list" open="(" separator="," close=")">

@@ -46,6 +46,9 @@
 				AND A.BOARD_ID = #{board_id}
 				AND A.POST_SN > #{post_sn}
 		]]>
+			<if test='post_cat != null and !post_cat.equals("")'>
+				AND A.POST_CAT = #{post_cat} 
+			</if>
 			<if test='post_cat_list != null and post_cat_list.length != 0'>
 				AND A.POST_CAT IN 
 				<foreach item="item" collection="post_cat_list" open="(" separator="," close=")">
@@ -79,6 +82,9 @@
 				AND A.BOARD_ID = #{board_id}
 				AND A.POST_SN < #{post_sn}
 		]]>
+			<if test='post_cat != null and !post_cat.equals("")'>
+				AND A.POST_CAT = #{post_cat} 
+			</if>
 			<if test='post_cat_list != null and post_cat_list.length != 0'>
 				AND A.POST_CAT IN 
 				<foreach item="item" collection="post_cat_list" open="(" separator="," close=")">
@@ -119,6 +125,9 @@
 				AND B.USE_STATE = 'Y'
 				AND A.BOARD_ID = #{board_id}
 		]]>
+			<if test='post_cat != null and !post_cat.equals("")'>
+				AND A.POST_CAT = #{post_cat} 
+			</if>
 			<if test='post_cat_list != null and post_cat_list.length != 0'>
 				AND A.POST_CAT IN 
 				<foreach item="item" collection="post_cat_list" open="(" separator="," close=")">
@@ -150,6 +159,9 @@
 				AND B.USE_STATE = 'Y'
 				AND A.BOARD_ID = #{board_id}
 		]]>
+			<if test='post_cat != null and !post_cat.equals("")'>
+				AND A.POST_CAT = #{post_cat} 
+			</if>
 			<if test='post_cat_list != null and post_cat_list.length != 0'>
 				AND A.POST_CAT IN 
 				<foreach item="item" collection="post_cat_list" open="(" separator="," close=")">
