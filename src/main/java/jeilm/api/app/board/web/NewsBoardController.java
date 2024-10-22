@@ -103,10 +103,12 @@ public class NewsBoardController {
 		
 		
 		result_prev.setPost_sn(newsBoardDetailVO.getPost_sn());
+		result_prev.setPost_cat(newsBoardDetailVO.getPost_cat());
 		result_prev.setPost_cat_list(newsBoardDetailVO.getPost_cat_list());
 		result_prev.setSearch_text(newsBoardDetailVO.getSearch_text());
 		
 		result_next.setPost_sn(newsBoardDetailVO.getPost_sn());
+		result_next.setPost_cat(newsBoardDetailVO.getPost_cat());
 		result_next.setPost_cat_list(newsBoardDetailVO.getPost_cat_list());
 		result_next.setSearch_text(newsBoardDetailVO.getSearch_text());
 		
