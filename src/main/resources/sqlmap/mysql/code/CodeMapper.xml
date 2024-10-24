@@ -3,6 +3,21 @@
 
 <mapper namespace="jeilm.api.app.code.service.mapper.CodeMapper">
 
+	<select id="selectCode" resultType="jeilm.api.app.code.vo.CodeVO">
+		<![CDATA[
+			/* selectCode */
+			SELECT
+				A.CODE_ID
+				, A.P_CODE_ID
+				, A.CODE_NM
+			FROM
+				TB_CODE A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.CODE_ID = #{code_id}
+		]]>
+	</select>
+	
 	<select id="selectCodeList" resultType="jeilm.api.app.code.vo.CodeVO">
 		<![CDATA[
 			/* selectCodeList */

@@ -16,6 +16,11 @@ public class CodeServiceImpl implements CodeService {
 	private final CodeMapper codeMapper;
 	
 	@Override
+	public CodeVO selectCode(CodeVO codeVO) throws Exception {
+		return codeMapper.selectCode(codeVO);
+	}
+	
+	@Override
 	public List<CodeVO> selectCodeList(CodeVO codeVO) throws Exception {
 		return codeMapper.selectCodeList(codeVO);
 	}
