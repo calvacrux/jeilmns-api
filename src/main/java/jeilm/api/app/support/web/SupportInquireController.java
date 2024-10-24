@@ -73,7 +73,7 @@ public class SupportInquireController {
 			resultMessage = "오류가 발생했습니다.";
 		} else {
 			resultCode = "OK";
-			resultMessage = "정상 완료했습니다.";
+			resultMessage = "정상 등록했습니다.";
 			
 			// 오늘날짜
 			Date date = new Date();
