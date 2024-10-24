@@ -3,6 +3,20 @@
 
 <mapper namespace="jeilm.api.app.support.service.mapper.SupportInquireMapper">
 	
+	<select id="selectSupportInquireFileList" resultType="jeilm.api.app.mail.vo.MailAttachFileVO">
+		<![CDATA[
+			/* selectSupportInquireFileList*/
+			SELECT
+				A.FILE_USER_NM
+				, A.FILE_PATH
+			FROM
+				TB_FILE A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.FILE_DATA_SN = #{inquire_sn}
+		]]>
+	</select>
+	
 	<insert id="insertSupportInquire" useGeneratedKeys="true" keyProperty="inquire_sn" keyColumn="inquire_sn">
 		<selectKey resultType="string" keyProperty="inquire_sn" order="BEFORE">
             <![CDATA[
@@ -17,5 +31,19 @@
 				(#{inquire_sn}, #{inquire_cat}, #{customer_nm}, #{customer_tel}, #{customer_mail}, #{inquire_title}, #{inquire_content})   
         ]]>	
 	</insert>
+	
+	<update id="deleteEthicsInquire">
+		<![CDATA[
+			/* deleteEthicsInquire */
+			UPDATE
+				TB_SUPPORT_INQUIRE
+			SET
+				USE_STATE = 'N'
+				, EDT_SN = #{edt_sn}
+				, EDT_DT = SYSDATE()
+			WHERE
+				INQUIRE_SN = #{inquire_sn}
+		]]>	
+	</update>
 
 </mapper>

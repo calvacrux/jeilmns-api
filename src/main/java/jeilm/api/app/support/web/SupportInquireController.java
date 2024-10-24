@@ -8,14 +8,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.mail.internet.InternetAddress;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jeilm.api.app.mail.service.MailService;
+import jeilm.api.app.mail.vo.MailAttachFileVO;
 import jeilm.api.app.mail.vo.MailContentVO;
 import jeilm.api.app.mail.vo.MailVO;
 import jeilm.api.app.support.service.SupportInquireService;
@@ -47,7 +49,7 @@ public class SupportInquireController {
 	 * @throws Exception
 	 */
 	@PostMapping("/v1/support/inquire")
-	public ResponseEntity<?> wrtieSupportInquireProcess(@RequestBody SupportInquireVO supportInquireVO, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ResponseEntity<?> wrtieSupportInquireProcess(SupportInquireVO supportInquireVO, @RequestParam("upload_file") List<MultipartFile> multipartFiles, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String resultCode = null;
@@ -56,15 +58,18 @@ public class SupportInquireController {
 		if (supportInquireVO.getInquire_cat().equals("code.inquire.ko.as") || supportInquireVO.getInquire_cat().equals("code.inquire.cn.as") || supportInquireVO.getInquire_cat().equals("code.inquire.en.as")
 				|| supportInquireVO.getInquire_cat().equals("code.inquire.ko.estimate") || supportInquireVO.getInquire_cat().equals("code.inquire.cn.estimate") || supportInquireVO.getInquire_cat().equals("code.inquire.en.estimate")) {
 			
-			int result = supportInquireService.insertSupportInquire(supportInquireVO);
+			String result = supportInquireService.insertSupportInquireReturnSn(supportInquireVO, multipartFiles);
 			
-			if (result < 1) {
+			if (result.equals("")) {
 				resultCode = "ERROR";
 				resultMessage = "오류가 발생했습니다.";
 			} else {
 				resultCode = "OK";
-				resultMessage = "정상 등록했습니다.";
+				resultMessage = "정상 완료했습니다.";
 				
+				// 첨부 파일
+				List<MailAttachFileVO> resultFileList = supportInquireService.selectSupportInquireFileList(supportInquireVO);
+								
 				// 메일 발송
 				SupportReceiveVO supportReceiveVO = new SupportReceiveVO();
 				List<SupportReceiveVO> resultList = supportReceiveService.selectSupportReceiveList(supportReceiveVO);
@@ -110,6 +115,8 @@ public class SupportInquireController {
 					mailContentVO.setContentValue(StringUtil.str2html(supportInquireVO.getInquire_content()));
 					contentList.add(mailContentVO);
 					
+					// 첨부파일
+					mailVO.setFileList(resultFileList);
 					mailVO.setContentList(contentList);
 					
 					mailService.sendMail(mailVO);
