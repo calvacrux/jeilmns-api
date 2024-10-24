@@ -97,7 +97,7 @@ public class SupportInquireController {
 				MailVO mailVO = new MailVO();
 				mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "홈페이지시스템"));
 				mailVO.setToInternetAddress(new InternetAddress(vo.getReceive_mail(), vo.getReceive_nm()));
-				mailVO.setMailSubject("홈페이지 고객지원 접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
+				mailVO.setMailSubject("홈페이지 문의 접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
 				mailVO.setTemplateView("layout/mail/inquire-request-manager");
 				
 				// 메일 본문

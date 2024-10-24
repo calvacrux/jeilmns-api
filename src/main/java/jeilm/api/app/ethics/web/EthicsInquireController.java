@@ -1,6 +1,8 @@
 package jeilm.api.app.ethics.web;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +33,12 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class EthicsInquireController {
+	
+	@Value("${global.base.url}")
+	private String resourceUrl;
+	
+	@Value("${global.manager.url}")
+	private String managerUrl;
 	
 	@Value("${spring.mail.username}")
 	private String fromMailAddress;
@@ -65,21 +73,24 @@ public class EthicsInquireController {
 			resultCode = "OK";
 			resultMessage = "정상 완료했습니다.";
 			
+			// 오늘날짜
+			Date date = new Date();
+			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy.MM.dd");
+			String nowDay = dtFormat.format(date);
+			
 			// 첨부 파일
 			List<MailAttachFileVO> resultFileList = ethicsInquireService.selectEthicsInquireFileList(ethicsInquireVO);
 						
-			// 메일 발송
+			// 관리자 메일발송
 			EthicsReceiveVO receiveVO = new EthicsReceiveVO();
 			List<EthicsReceiveVO> resultList = ethicsReceiveService.selectEthicsReceiveList(receiveVO);
 			
 			for (EthicsReceiveVO vo : resultList) {
 				MailVO mailVO = new MailVO();
-				// mailVO.setFromAddress(fromMailAddress);
 				mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "홈페이지시스템"));
-				//mailVO.setToAddress(vo.getReceive_mail());
 				mailVO.setToInternetAddress(new InternetAddress(vo.getReceive_mail(), vo.getReceive_nm()));
 				mailVO.setMailSubject("홈페이지 윤리경영 접수 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
-				mailVO.setTemplateView("layout/mail/ethics-request");
+				mailVO.setTemplateView("layout/mail/ethics-request-manager");
 				
 				// 메일 본문
 				List<MailContentVO> contentList = new ArrayList<MailContentVO>();
@@ -109,12 +120,83 @@ public class EthicsInquireController {
 				mailContentVO.setContentValue(StringUtil.str2html(ethicsInquireVO.getInquire_content()));
 				contentList.add(mailContentVO);
 				
+				mailContentVO = new MailContentVO();
+				mailContentVO.setContentKey("inquire_day");
+				mailContentVO.setContentValue(nowDay);
+				contentList.add(mailContentVO);
+				
+				mailContentVO = new MailContentVO();
+				mailContentVO.setContentKey("managerUrl");
+				mailContentVO.setContentValue(managerUrl);
+				contentList.add(mailContentVO);
+				
+				mailContentVO = new MailContentVO();
+				mailContentVO.setContentKey("resourceUrl");
+				mailContentVO.setContentValue(resourceUrl);
+				contentList.add(mailContentVO);
+				
 				// 첨부파일
 				mailVO.setFileList(resultFileList);
 				mailVO.setContentList(contentList);
 				
 				mailService.sendMail(mailVO);
 			}
+			
+			// 사용자 메일발송
+			MailVO mailVO = new MailVO();
+			mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
+			mailVO.setToInternetAddress(new InternetAddress(ethicsInquireVO.getCustomer_mail(), ethicsInquireVO.getCustomer_nm()));
+			mailVO.setMailSubject("제일엠앤에스 윤리경영 접수 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
+			mailVO.setTemplateView("layout/mail/ethics-request-user");
+			
+			// 메일 본문
+			List<MailContentVO> contentList = new ArrayList<MailContentVO>();
+			
+			MailContentVO mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("customer_nm");
+			mailContentVO.setContentValue(ethicsInquireVO.getCustomer_nm());
+			contentList.add(mailContentVO);
+			
+			mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("customer_tel");
+			mailContentVO.setContentValue(ethicsInquireVO.getCustomer_tel());
+			contentList.add(mailContentVO);
+			
+			mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("customer_mail");
+			mailContentVO.setContentValue(ethicsInquireVO.getCustomer_mail());
+			contentList.add(mailContentVO);
+			
+			mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("inquire_title");
+			mailContentVO.setContentValue(StringUtil.str2html(ethicsInquireVO.getInquire_title()));
+			contentList.add(mailContentVO);
+			
+			mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("inquire_content");
+			mailContentVO.setContentValue(StringUtil.str2html(ethicsInquireVO.getInquire_content()));
+			contentList.add(mailContentVO);
+			
+			mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("inquire_day");
+			mailContentVO.setContentValue(nowDay);
+			contentList.add(mailContentVO);
+			
+			mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("managerUrl");
+			mailContentVO.setContentValue(managerUrl);
+			contentList.add(mailContentVO);
+			
+			mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("resourceUrl");
+			mailContentVO.setContentValue(resourceUrl);
+			contentList.add(mailContentVO);
+			
+			// 첨부파일
+			mailVO.setFileList(resultFileList);
+			mailVO.setContentList(contentList);
+			
+			mailService.sendMail(mailVO);
 		}
 		
 		map.put("result_code", resultCode);
