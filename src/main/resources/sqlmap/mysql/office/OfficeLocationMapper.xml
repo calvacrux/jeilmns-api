@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.office.service.mapper.OfficeLocationMapper">
+
+	<select id="selectOfficeLocationList" resultType="jeilm.api.app.office.vo.OfficeLocationVO">
+		<![CDATA[
+			/* selectOfficeLocationList */
+			SELECT
+				A.LOCATION_SN
+				, A.NATION_SN
+				, A.LOCATION_ID
+				, A.DOMESTIC_YN
+				, A.LOCATION_NM
+				, A.LOCATION_ADDR
+				, A.LOCATION_TEL
+				, A.LOCATION_FAX
+				, A.SORT_NO
+				, DATE_FORMAT(A.REG_DT, '%Y-%m-%d') REG_DT
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.LOCATION_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_PATH_MAIN
+				, B.NATION_NM
+			FROM
+				TB_OFFICE_LOCATION A
+				INNER JOIN TB_OFFICE_NATION B ON (B.NATION_SN = A.NATION_SN)
+			WHERE
+				A.USE_STATE = 'Y'
+				AND B.USE_STATE = 'Y'
+				AND A.LOCATION_ID = #{location_id}
+		]]>
+			<if test='nation_sn != null and !nation_sn.equals("")'>
+				AND A.NATION_SN = #{nation_sn} 
+			</if>
+			<if test='domestic_yn != null and !domestic_yn.equals("")'>
+				AND A.DOMESTIC_YN = #{domestic_yn} 
+			</if>
+		<![CDATA[
+			ORDER BY
+				A.SORT_NO ASC
+		]]>
+	</select>
+	
+</mapper>

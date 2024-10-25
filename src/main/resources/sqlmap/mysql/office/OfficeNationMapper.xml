@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.office.service.mapper.OfficeNationMapper">
+
+	<select id="selectOfficeNationList" resultType="jeilm.api.app.office.vo.OfficeNationVO">
+		<![CDATA[
+			/* selectOfficeNationList */
+			SELECT
+				A.NATION_SN
+				, A.NATION_ID
+				, A.NATION_NM
+				, A.NATION_X
+				, A.NATION_Y
+			FROM
+				TB_OFFICE_NATION A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.NATION_ID = #{nation_id}
+			ORDER BY
+				A.SORT_NO ASC
+		]]>
+	</select>
+
+</mapper>
