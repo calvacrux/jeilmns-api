@@ -31,22 +31,24 @@ public class SupportInquireServiceImpl implements SupportInquireService {
 		
 		returnValue = supportInquireMapper.insertSupportInquire(supportInquireVO);
 		
-		for (MultipartFile file : multipartFiles) {
-			StorageVO storageVO = new StorageVO();
-			storageVO.setFile_data_sn(supportInquireVO.getInquire_sn());
-			storageVO.setReg_sn("");
-			storageVO.setSub_dir("inquire");
-			
-			if (!file.isEmpty()) {
-				// 파일 컨텐츠 코드별 추가 - 인덱스와 컨텐츠 확인필요				
-				if (multipartFiles.indexOf(file) == 0) {
-					storageVO.setFile_content_cd("main");
-				}
+		if (multipartFiles != null) {
+			for (MultipartFile file : multipartFiles) {
+				StorageVO storageVO = new StorageVO();
+				storageVO.setFile_data_sn(supportInquireVO.getInquire_sn());
+				storageVO.setReg_sn("");
+				storageVO.setSub_dir("inquire");
 				
-				storageVO = storageService.insertFile(storageVO, file);
-				
-				if (storageVO == null) {
-					returnValue = 0;
+				if (!file.isEmpty()) {
+					// 파일 컨텐츠 코드별 추가 - 인덱스와 컨텐츠 확인필요				
+					if (multipartFiles.indexOf(file) == 0) {
+						storageVO.setFile_content_cd("main");
+					}
+					
+					storageVO = storageService.insertFile(storageVO, file);
+					
+					if (storageVO == null) {
+						returnValue = 0;
+					}
 				}
 			}
 		}

@@ -58,7 +58,7 @@ public class EthicsInquireController {
 	 * @throws Exception
 	 */
 	@PostMapping("/v1/ethics/inquire")
-	public ResponseEntity<?> wrtieEthicsInquireProcess(EthicsInquireVO ethicsInquireVO, @RequestParam("upload_file") List<MultipartFile> multipartFiles, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ResponseEntity<?> wrtieEthicsInquireProcess(EthicsInquireVO ethicsInquireVO, @RequestParam(name = "upload_file", required = false) List<MultipartFile> multipartFiles, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String resultCode = null;
