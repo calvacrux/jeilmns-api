@@ -60,7 +60,7 @@ public class SupportInquireController {
 	 * @throws Exception
 	 */
 	@PostMapping("/v1/support/inquire")
-	public ResponseEntity<?> wrtieSupportInquireProcess(SupportInquireVO supportInquireVO, @RequestParam("upload_file") List<MultipartFile> multipartFiles, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ResponseEntity<?> wrtieSupportInquireProcess(SupportInquireVO supportInquireVO, @RequestParam(name = "upload_file", required = false) List<MultipartFile> multipartFiles, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String resultCode = null;
