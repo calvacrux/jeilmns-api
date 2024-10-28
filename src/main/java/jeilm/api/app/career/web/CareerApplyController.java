@@ -45,7 +45,7 @@ public class CareerApplyController {
 	private final MailService mailService;
 	
 	@PostMapping("/v1/career/apply")
-	public ResponseEntity<?> wrtieCareerApplyProcess(CareerApplyVO careerApplyVO, @RequestParam("upload_file_profile") MultipartFile multipartFileProfile, @RequestParam("upload_file_portfolio") MultipartFile multipartFilePortfolio, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ResponseEntity<?> wrtieCareerApplyProcess(CareerApplyVO careerApplyVO, @RequestParam(name = "upload_file_profile", required = false) MultipartFile multipartFileProfile, @RequestParam(name = "upload_file_portfolio", required = false) MultipartFile multipartFilePortfolio, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String resultCode = null;

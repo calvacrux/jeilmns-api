@@ -33,31 +33,36 @@ public class CareerApplyServiceImpl implements CareerApplyService {
 		
 		// 파일 추가
 		if (returnValue > 0) {
-			if (!multipartFileProfile.isEmpty()) {
-				StorageVO storageVO = new StorageVO();
-				storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
-				storageVO.setReg_sn("");
-				storageVO.setSub_dir("career");
-				storageVO.setFile_content_cd("profile");
-				storageVO = storageService.insertFile(storageVO, multipartFileProfile);	
-				
-				if (storageVO == null) {
-					returnValue = 0;
+			if (multipartFileProfile != null) {
+				if (!multipartFileProfile.isEmpty()) {
+					StorageVO storageVO = new StorageVO();
+					storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
+					storageVO.setReg_sn("");
+					storageVO.setSub_dir("career");
+					storageVO.setFile_content_cd("profile");
+					storageVO = storageService.insertFile(storageVO, multipartFileProfile);	
+					
+					if (storageVO == null) {
+						returnValue = 0;
+					}
 				}
 			}
 			
-			if (!multipartFilePortfolio.isEmpty()) {
-				StorageVO storageVO = new StorageVO();
-				storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
-				storageVO.setReg_sn("");
-				storageVO.setSub_dir("career");
-				storageVO.setFile_content_cd("portfolio");
-				storageVO = storageService.insertFile(storageVO, multipartFilePortfolio);	
-				
-				if (storageVO == null) {
-					returnValue = 0;
+			if (multipartFilePortfolio != null) {
+				if (!multipartFilePortfolio.isEmpty()) {
+					StorageVO storageVO = new StorageVO();
+					storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
+					storageVO.setReg_sn("");
+					storageVO.setSub_dir("career");
+					storageVO.setFile_content_cd("portfolio");
+					storageVO = storageService.insertFile(storageVO, multipartFilePortfolio);	
+					
+					if (storageVO == null) {
+						returnValue = 0;
+					}
 				}
 			}
+			
 		}
 		
 		// 파일 업로드 오류시 게시물 삭제
@@ -79,31 +84,36 @@ public class CareerApplyServiceImpl implements CareerApplyService {
 		
 		// 파일 추가
 		if (returnValue > 0) {
-			if (!multipartFileProfile.isEmpty()) {
-				StorageVO storageVO = new StorageVO();
-				storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
-				storageVO.setReg_sn("");
-				storageVO.setSub_dir("career");
-				storageVO.setFile_content_cd("profile");
-				storageVO = storageService.insertFile(storageVO, multipartFileProfile);	
-				
-				if (storageVO == null) {
-					returnValue = 0;
+			if (multipartFileProfile != null) {
+				if (!multipartFileProfile.isEmpty()) {
+					StorageVO storageVO = new StorageVO();
+					storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
+					storageVO.setReg_sn("");
+					storageVO.setSub_dir("career");
+					storageVO.setFile_content_cd("profile");
+					storageVO = storageService.insertFile(storageVO, multipartFileProfile);	
+					
+					if (storageVO == null) {
+						returnValue = 0;
+					}
 				}
 			}
 			
-			if (!multipartFilePortfolio.isEmpty()) {
-				StorageVO storageVO = new StorageVO();
-				storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
-				storageVO.setReg_sn("");
-				storageVO.setSub_dir("career");
-				storageVO.setFile_content_cd("portfolio");
-				storageVO = storageService.insertFile(storageVO, multipartFilePortfolio);	
-				
-				if (storageVO == null) {
-					returnValue = 0;
+			if (multipartFilePortfolio != null) {
+				if (!multipartFilePortfolio.isEmpty()) {
+					StorageVO storageVO = new StorageVO();
+					storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
+					storageVO.setReg_sn("");
+					storageVO.setSub_dir("career");
+					storageVO.setFile_content_cd("portfolio");
+					storageVO = storageService.insertFile(storageVO, multipartFilePortfolio);	
+					
+					if (storageVO == null) {
+						returnValue = 0;
+					}
 				}
 			}
+			
 		}
 		
 		// 파일 업로드 오류시 게시물 삭제
