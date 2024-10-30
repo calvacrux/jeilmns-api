@@ -9,17 +9,18 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.Data;
 
 @Data
-public class EsgMemberVO implements Serializable {
+public class EsgAuditVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	// 기본
 	@JsonIgnore
-	private String member_id;				// 위원회 아이디
-	private String member_cat;				// 위원회명
-	private String member_nm;				// 위원장
-	private String member_member;			// 위원
-	private String member_task;				// 역할
+	private String audit_id;				// 외부감사 아이디
+	private String audit_nm;				// 외부감사 법인명
+	private String audit_appoint_day;		// 외부감사 선임일
+	private String audit_term_start_day;	// 감사대상 시작일
+	private String audit_term_end_day;		// 감사대상 종료일
+	private String audit_opinion;			// 감사의견
 	
 	// 요청
 	@JsonProperty(access = Access.WRITE_ONLY)

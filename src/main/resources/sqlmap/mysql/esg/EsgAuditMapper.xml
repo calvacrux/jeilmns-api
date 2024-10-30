@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.esg.service.mapper.EsgAuditMapper">
+
+	<select id="selectEsgAuditList" resultType="jeilm.api.app.esg.vo.EsgAuditVO">
+		<![CDATA[
+			/* selectEsgAuditList */
+			SELECT
+				A.AUDIT_NM
+				, A.AUDIT_APPOINT_DAY
+				, A.AUDIT_TERM_START_DAY
+				, A.AUDIT_TERM_END_DAY
+				, A.AUDIT_OPINION
+			FROM
+				TB_ESG_AUDIT A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.AUDIT_ID = #{audit_id}
+			ORDER BY
+				A.AUDIT_SN DESC
+		]]>
+	</select>
+	
+</mapper>
