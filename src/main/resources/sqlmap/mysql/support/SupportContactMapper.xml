@@ -17,9 +17,10 @@
 				TB_SUPPORT_CONTACT A
 			WHERE
 				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
 				AND A.CONTACT_ID = #{contact_id}
 			ORDER BY
-				A.DISPLAY_YN DESC, A.SORT_NO ASC
+				A.SORT_NO ASC
 		]]>
 	</select>
 
