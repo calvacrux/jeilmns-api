@@ -21,22 +21,35 @@ public class OfficeLocationVO implements Serializable {
 	@JsonIgnore
 	private String location_id;				// 위치 아이디
 	private String domestic_yn;				// 국내여부(Y:예, N:아니오)
+	private String location_type;			// 사업장 구분
 	private String location_nm;				// 사업장 이름
 	private String location_addr;			// 사업장 주소
 	private String location_tel;			// 사업장 전화
 	private String location_fax;			// 사업장 팩스
 	
-	// 파일 - 메인
+	// 파일 - PC
 	@JsonIgnore
-	private String file_path_main;				// 메인 파일 경로
+	private String file_path_main;				// PC 파일 경로
+	@JsonIgnore
+	private String file_path_mobile;			// Mobile 파일 경로
 	
-	// 파일 - 메인 URL
-	public String file_url_main;				// 메인 파일 URL
+	// 파일 - PC URL
+	public String file_url_main;				// PC 파일 URL
 	public String getFile_url_main() {
 		if (file_path_main == null) {
 			return null;
 		} else {
 			return AppConstant.storagePath.concat(file_path_main);
+		}
+	}
+	
+	// 파일 - Mobile URL
+	public String file_url_mobile;				// Mobile 파일 URL
+	public String getFile_url_mobile() {
+		if (file_path_mobile == null) {
+			return null;
+		} else {
+			return AppConstant.storagePath.concat(file_path_mobile);
 		}
 	}
 	
