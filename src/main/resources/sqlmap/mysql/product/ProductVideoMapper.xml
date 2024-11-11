@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.product.service.mapper.ProductVideoMapper">
+
+	<select id="selectProductVideoList" resultType="jeilm.api.app.product.vo.ProductVideoVO">
+		<![CDATA[
+			/* selectProductVideoList */
+			SELECT
+				A.VIDEO_SN
+				, A.INFO_SN
+				, A.VIDEO_URL
+			FROM
+				TB_PRODUCT_VIDEO A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND A.INFO_SN = #{info_sn}
+			ORDER BY
+				A.SORT_NO ASC
+		]]>
+	</select>
+	
+</mapper>

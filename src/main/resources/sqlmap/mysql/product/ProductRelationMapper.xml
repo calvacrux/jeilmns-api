@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.product.service.mapper.ProductRelationMapper">
+	
+	<select id="selectProductRelationList" resultType="jeilm.api.app.product.vo.ProductRelationVO">
+		<![CDATA[
+			/* selectProductRelationList */
+			SELECT
+				A.INFO_SN_REL AS INFO_SN
+				, B.INFO_TITLE
+				, C.CATEGORY_SN
+				, C.CATEGORY_NM
+			FROM
+				TB_PRODUCT_RELATION A
+				INNER JOIN TB_PRODUCT_INFO B ON (B.INFO_SN = A.INFO_SN_REL)
+				INNER JOIN TB_PRODUCT_CATEGORY C ON (C.CATEGORY_SN = B.CATEGORY_SN)
+			WHERE
+				B.USE_STATE = 'Y'
+				AND B.DISPLAY_YN = 'Y'
+				AND A.INFO_SN_ORG = #{info_sn_org}
+			ORDER BY
+				C.SORT_NO ASC, B.SORT_NO ASC
+		]]>
+	</select>
+	
+</mapper>

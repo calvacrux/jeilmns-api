@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.product.service.mapper.ProductInfoMapper">
+
+	<select id="selectProductInfo" resultType="jeilm.api.app.product.vo.ProductInfoDetailVO">
+		<![CDATA[
+			/* selectProductInfo */
+			SELECT
+				A.INFO_SN
+				, A.CATEGORY_SN
+				, A.INFO_TITLE
+				, A.INFO_TITLE_SUB
+				, A.INFO_DESC
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.INFO_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb_01') AS FILE_PATH_THUMB_01
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.INFO_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb_02') AS FILE_PATH_THUMB_02
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.INFO_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb_03') AS FILE_PATH_THUMB_03
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.INFO_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb_04') AS FILE_PATH_THUMB_04
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.INFO_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb_05') AS FILE_PATH_THUMB_05
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.INFO_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'spec') AS FILE_PATH_SPEC
+				, B.CATEGORY_NM
+			FROM
+				TB_PRODUCT_INFO A
+				INNER JOIN TB_PRODUCT_CATEGORY B ON (B.CATEGORY_SN = A.CATEGORY_SN)
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND A.INFO_SN = #{info_sn}
+		]]>
+	</select>
+	
+	<select id="selectProductInfoList" resultType="jeilm.api.app.product.vo.ProductInfoListVO">
+		<![CDATA[
+			/* selectProductInfoList */
+			SELECT
+				A.INFO_SN
+				, A.CATEGORY_SN
+				, A.INFO_TITLE
+				, A.INFO_DESC_SUB
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.INFO_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb_01') AS FILE_PATH_THUMB_01
+				, B.CATEGORY_NM
+			FROM
+				TB_PRODUCT_INFO A
+				INNER JOIN TB_PRODUCT_CATEGORY B ON (B.CATEGORY_SN = A.CATEGORY_SN)
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND B.USE_STATE = 'Y'
+				AND B.DISPLAY_YN = 'Y'
+				AND B.CATEGORY_ID = #{category_id}
+		]]>
+			<if test='category_sn != null and !category_sn.equals("")'>
+				AND A.CATEGORY_SN = #{category_sn} 
+			</if>
+		<![CDATA[
+			ORDER BY
+				A.SORT_NO ASC
+		]]>
+	</select>
+	
+</mapper>

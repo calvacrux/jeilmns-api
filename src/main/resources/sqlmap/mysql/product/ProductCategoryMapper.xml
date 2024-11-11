@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.product.service.mapper.ProductCategoryMapper">
+
+	<select id="selectProductCategoryList" resultType="jeilm.api.app.product.vo.ProductCategoryVO">
+		<![CDATA[
+			/* selectProductCategoryList */
+			SELECT
+				A.CATEGORY_SN
+				, A.CATEGORY_ID
+				, A.CATEGORY_NM
+			FROM
+				TB_PRODUCT_CATEGORY A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND A.CATEGORY_ID = #{category_id}
+			ORDER BY
+				A.SORT_NO ASC
+		]]>
+	</select>
+	
+</mapper>
