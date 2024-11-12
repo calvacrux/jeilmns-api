@@ -88,8 +88,13 @@ public class SupportInquireController {
 			// 첨부 파일
 			List<MailAttachFileVO> resultFileList = supportInquireService.selectSupportInquireFileList(supportInquireVO);
 							
-			// 관리자 발송자
+			// 관리자 발송자 - 코드값 변경
 			SupportReceiveVO supportReceiveVO = new SupportReceiveVO();
+			String receiveCategory = supportInquireVO.getInquire_cat();
+			receiveCategory = receiveCategory.replace(".en.", ".ko.");
+			receiveCategory = receiveCategory.replace(".cn.", ".ko.");
+			supportReceiveVO.setReceive_cat(receiveCategory);			
+			
 			List<SupportReceiveVO> resultList = supportReceiveService.selectSupportReceiveList(supportReceiveVO);
 			
 			// 관리자 메일발송 

@@ -8,12 +8,14 @@
 			/* selectSupportReceiveList */
 			SELECT
 				A.RECEIVE_SN
+				, A.RECEIVE_CAT
 				, A.RECEIVE_NM
 				, A.RECEIVE_MAIL
 			FROM
 				TB_SUPPORT_RECEIVE A
 			WHERE
 				A.USE_STATE = 'Y'
+				AND A.RECEIVE_CAT = #{receive_cat}
 			ORDER BY
 				A.RECEIVE_NM ASC
 		]]>

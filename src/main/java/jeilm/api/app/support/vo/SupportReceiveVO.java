@@ -11,6 +11,7 @@ public class SupportReceiveVO implements Serializable {
 	
 	// 기본
 	private String receive_sn;		// 수신 번호
+	private String receive_cat;		// 수신 카테고리
 	private String receive_nm;		// 수신 이름
 	private String receive_mail;	// 수신 메일
 	
