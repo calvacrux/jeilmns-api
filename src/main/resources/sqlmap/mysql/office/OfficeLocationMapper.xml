@@ -37,7 +37,7 @@
 			</if>
 		<![CDATA[
 			ORDER BY
-				A.SORT_NO ASC
+				B.SORT_NO ASC, A.SORT_NO ASC
 		]]>
 	</select>
 	
