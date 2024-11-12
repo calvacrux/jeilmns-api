@@ -26,7 +26,7 @@ public class CareerApplyServiceImpl implements CareerApplyService {
 	}
 
 	@Override
-	public int insertCareerApply(CareerApplyVO careerApplyVO, MultipartFile multipartFileProfile, MultipartFile multipartFilePortfolio) throws Exception {
+	public int insertCareerApply(CareerApplyVO careerApplyVO, MultipartFile multipartFileProfile, MultipartFile multipartFilePortfolio, MultipartFile multipartFileEtc) throws Exception {
 		int returnValue = 1;
 		
 		returnValue = careerApplyMapper.insertCareerApply(careerApplyVO);
@@ -63,6 +63,21 @@ public class CareerApplyServiceImpl implements CareerApplyService {
 				}
 			}
 			
+			if (multipartFileEtc != null) {
+				if (!multipartFileEtc.isEmpty()) {
+					StorageVO storageVO = new StorageVO();
+					storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
+					storageVO.setReg_sn("");
+					storageVO.setSub_dir("career");
+					storageVO.setFile_content_cd("etc");
+					storageVO = storageService.insertFile(storageVO, multipartFileEtc);	
+					
+					if (storageVO == null) {
+						returnValue = 0;
+					}
+				}
+			}
+			
 		}
 		
 		// 파일 업로드 오류시 게시물 삭제
@@ -75,7 +90,7 @@ public class CareerApplyServiceImpl implements CareerApplyService {
 	}
 	
 	@Override
-	public String insertCareerApplyReturnSn(CareerApplyVO careerApplyVO, MultipartFile multipartFileProfile, MultipartFile multipartFilePortfolio) throws Exception {
+	public String insertCareerApplyReturnSn(CareerApplyVO careerApplyVO, MultipartFile multipartFileProfile, MultipartFile multipartFilePortfolio, MultipartFile multipartFileEtc) throws Exception {
 		String retunSn = "";
 		
 		int returnValue = 1;
@@ -107,6 +122,21 @@ public class CareerApplyServiceImpl implements CareerApplyService {
 					storageVO.setSub_dir("career");
 					storageVO.setFile_content_cd("portfolio");
 					storageVO = storageService.insertFile(storageVO, multipartFilePortfolio);	
+					
+					if (storageVO == null) {
+						returnValue = 0;
+					}
+				}
+			}
+			
+			if (multipartFileEtc != null) {
+				if (!multipartFileEtc.isEmpty()) {
+					StorageVO storageVO = new StorageVO();
+					storageVO.setFile_data_sn(careerApplyVO.getApply_sn());
+					storageVO.setReg_sn("");
+					storageVO.setSub_dir("career");
+					storageVO.setFile_content_cd("etc");
+					storageVO = storageService.insertFile(storageVO, multipartFileEtc);	
 					
 					if (storageVO == null) {
 						returnValue = 0;

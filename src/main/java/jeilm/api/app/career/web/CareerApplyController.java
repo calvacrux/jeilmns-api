@@ -45,7 +45,7 @@ public class CareerApplyController {
 	private final MailService mailService;
 	
 	@PostMapping("/v1/career/apply")
-	public ResponseEntity<?> wrtieCareerApplyProcess(CareerApplyVO careerApplyVO, @RequestParam(name = "upload_file_profile", required = false) MultipartFile multipartFileProfile, @RequestParam(name = "upload_file_portfolio", required = false) MultipartFile multipartFilePortfolio, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ResponseEntity<?> wrtieCareerApplyProcess(CareerApplyVO careerApplyVO, @RequestParam(name = "upload_file_profile", required = false) MultipartFile multipartFileProfile, @RequestParam(name = "upload_file_portfolio", required = false) MultipartFile multipartFilePortfolio, @RequestParam(name = "upload_file_etc", required = false) MultipartFile multipartFileEtc, SessionStatus status, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String resultCode = null;
@@ -61,7 +61,7 @@ public class CareerApplyController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 		String formatedNow = now.format(formatter);
 		
-		String result = careerApplyService.insertCareerApplyReturnSn(careerApplyVO, multipartFileProfile, multipartFilePortfolio);
+		String result = careerApplyService.insertCareerApplyReturnSn(careerApplyVO, multipartFileProfile, multipartFilePortfolio, multipartFileEtc);
 		
 		if (result.equals("")) {
 			resultCode = "ERROR";

@@ -24,7 +24,7 @@ public interface CareerApplyService {
 	 * @return
 	 * @throws Exception
 	 */
-	int insertCareerApply(CareerApplyVO careerApplyVO, MultipartFile multipartFileProfile, MultipartFile multipartFilePortfolio) throws Exception;
+	int insertCareerApply(CareerApplyVO careerApplyVO, MultipartFile multipartFileProfile, MultipartFile multipartFilePortfolio, MultipartFile multipartFileEtc) throws Exception;
 	
 	/**
 	 * 채용지원 입력
@@ -33,7 +33,7 @@ public interface CareerApplyService {
 	 * @return
 	 * @throws Exception
 	 */
-	String insertCareerApplyReturnSn(CareerApplyVO careerApplyVO, MultipartFile multipartFileProfile, MultipartFile multipartFilePortfolio) throws Exception;
+	String insertCareerApplyReturnSn(CareerApplyVO careerApplyVO, MultipartFile multipartFileProfile, MultipartFile multipartFilePortfolio, MultipartFile multipartFileEtc) throws Exception;
 	
 	/**
 	 * 채용지원 삭제
