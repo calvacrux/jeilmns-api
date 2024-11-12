@@ -18,7 +18,7 @@
 				A.USE_STATE = 'Y'
 				AND A.AUDIT_ID = #{audit_id}
 			ORDER BY
-				A.AUDIT_SN DESC
+				A.AUDIT_TERM_START_DAY DESC
 		]]>
 	</select>
 	

@@ -17,7 +17,7 @@
 				A.USE_STATE = 'Y'
 				AND A.MEMBER_ID = #{member_id}
 			ORDER BY
-				A.MEMBER_SN DESC
+				A.SORT_NO ASC
 		]]>
 	</select>
 	

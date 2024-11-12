@@ -17,7 +17,7 @@
 				A.USE_STATE = 'Y'
 				AND A.REPORT_ID = #{report_id}
 			ORDER BY
-				A.REPORT_SN DESC
+				A.REPORT_OPEN_DAY DESC
 		]]>
 	</select>
 	
