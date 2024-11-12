@@ -7,18 +7,32 @@
 		<![CDATA[
 			/* selectOfficeNationList */
 			SELECT
-				A.NATION_SN
-				, A.NATION_ID
-				, A.NATION_NM
-				, A.NATION_X
-				, A.NATION_Y
+				AA.NATION_SN
+				, AA.NATION_ID
+				, AA.NATION_NM
+				, AA.NATION_X
+				, AA.NATION_Y
+				, IFNULL(BB.NATION_COUNT, 0) AS NATION_COUNT
 			FROM
-				TB_OFFICE_NATION A
+				TB_OFFICE_NATION AA
+				LEFT OUTER JOIN 
+				(
+					SELECT
+						A.NATION_SN
+						, COUNT(A.NATION_SN) AS NATION_COUNT
+					FROM
+						TB_OFFICE_LOCATION A
+					WHERE
+						A.USE_STATE = 'Y'
+						AND A.LOCATION_ID = #{location_id}
+					GROUP BY
+						A.NATION_SN		
+				) BB ON (BB.NATION_SN = AA.NATION_SN)
 			WHERE
-				A.USE_STATE = 'Y'
-				AND A.NATION_ID = #{nation_id}
+				AA.USE_STATE = 'Y'
+				AND AA.NATION_ID = #{nation_id}
 			ORDER BY
-				A.SORT_NO ASC
+				AA.SORT_NO ASC
 		]]>
 	</select>
 

@@ -36,11 +36,11 @@ public class OfficeNationController {
 		
 		// 아이디
 		if (officeNationVO.getLang().equals("ko")) {
-			officeNationVO.setNation_id("nation.ko");
+			officeNationVO.setNation_id("nation.ko"); officeNationVO.setLocation_id("location.ko"); 
 		} else if (officeNationVO.getLang().equals("en")) {
-			officeNationVO.setNation_id("nation.en");
+			officeNationVO.setNation_id("nation.en"); officeNationVO.setLocation_id("location.en"); 
 		} else if (officeNationVO.getLang().equals("cn")) {
-			officeNationVO.setNation_id("nation.cn");
+			officeNationVO.setNation_id("nation.cn"); officeNationVO.setLocation_id("location.cn"); 
 		} else {
 			return JsonResult.fail("언어설정이 올바르지 않습니다.");
 		}

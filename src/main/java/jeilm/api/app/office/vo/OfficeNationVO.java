@@ -20,6 +20,11 @@ public class OfficeNationVO implements Serializable {
 	private String nation_nm;				// 국가 이름
 	private String nation_x;				// 국가 위치 X
 	private String nation_y;				// 국가 위치 Y
+	private int nation_count;				// 국가의 사무소 카운트
+	
+	// 조인
+	@JsonIgnore
+	private String location_id;				// 위치 아이디
 	
 	// 요청
 	@JsonProperty(access = Access.WRITE_ONLY)
