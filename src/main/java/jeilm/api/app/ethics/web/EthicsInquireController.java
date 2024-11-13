@@ -89,7 +89,7 @@ public class EthicsInquireController {
 				MailVO mailVO = new MailVO();
 				mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "홈페이지시스템"));
 				mailVO.setToInternetAddress(new InternetAddress(vo.getReceive_mail(), vo.getReceive_nm()));
-				mailVO.setMailSubject("홈페이지 윤리경영 접수 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
+				mailVO.setMailSubject("[제일엠앤에스] 윤리경영접수 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
 				mailVO.setTemplateView("layout/mail/ethics-request-manager");
 				
 				// 메일 본문
@@ -146,7 +146,7 @@ public class EthicsInquireController {
 			MailVO mailVO = new MailVO();
 			mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
 			mailVO.setToInternetAddress(new InternetAddress(ethicsInquireVO.getCustomer_mail(), ethicsInquireVO.getCustomer_nm()));
-			mailVO.setMailSubject("제일엠앤에스 윤리경영 접수 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
+			mailVO.setMailSubject("[제일엠앤에스] 윤리경영접수 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
 			mailVO.setTemplateView("layout/mail/ethics-request-user");
 			
 			// 메일 본문

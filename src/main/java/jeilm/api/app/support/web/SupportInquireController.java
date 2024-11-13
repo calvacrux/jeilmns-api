@@ -102,7 +102,7 @@ public class SupportInquireController {
 				MailVO mailVO = new MailVO();
 				mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "홈페이지시스템"));
 				mailVO.setToInternetAddress(new InternetAddress(vo.getReceive_mail(), vo.getReceive_nm()));
-				mailVO.setMailSubject("홈페이지 문의 접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
+				mailVO.setMailSubject("[제일엠앤에스] 문의접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
 				mailVO.setTemplateView("layout/mail/inquire-request-manager");
 				
 				// 메일 본문
@@ -164,7 +164,7 @@ public class SupportInquireController {
 			MailVO mailVO = new MailVO();
 			mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
 			mailVO.setToInternetAddress(new InternetAddress(supportInquireVO.getCustomer_mail(), supportInquireVO.getCustomer_nm()));
-			mailVO.setMailSubject("제일엠앤에스 문의 접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
+			mailVO.setMailSubject("[제일엠앤에스] 문의접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
 			mailVO.setTemplateView("layout/mail/inquire-request-user");
 			
 			// 메일 본문
