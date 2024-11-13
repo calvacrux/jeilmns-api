@@ -22,7 +22,8 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 @Configuration
 public class TransactionConfig {
 
-	private static final int TX_METHOD_TIMEOUT = 3;
+	// 파일 업로드 용량 때문에 시간을 늘림
+	private static final int TX_METHOD_TIMEOUT = 60;
     private static final String AOP_POINTCUT_EXPRESSION = "execution(* jeilm..service.impl.*Impl.*(..))";
 
     @Autowired
