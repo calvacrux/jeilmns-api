@@ -1,8 +1,8 @@
 package jeilm.api.app.career.web;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +36,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CareerApplyController {
 
+	@Value("${global.base.url}")
+	private String resourceUrl;
+	
+	@Value("${global.manager.url}")
+	private String managerUrl;
+	
 	@Value("${spring.mail.username}")
 	private String fromMailAddress;
 	
@@ -56,11 +62,6 @@ public class CareerApplyController {
 		careerPositionVO.setPosition_sn(careerApplyVO.getPosition_sn());
 		careerPositionVO = careerPositionService.selectPosition(careerPositionVO);
 		
-		// 날짜
-		LocalDate now = LocalDate.now();         
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
-		String formatedNow = now.format(formatter);
-		
 		String result = careerApplyService.insertCareerApplyReturnSn(careerApplyVO, multipartFileProfile, multipartFilePortfolio, multipartFileEtc);
 		
 		if (result.equals("")) {
@@ -69,6 +70,11 @@ public class CareerApplyController {
 		} else {
 			resultCode = "OK";
 			resultMessage = "정상 등록되었습니다.";
+			
+			// 오늘날짜
+			Date date = new Date();
+			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy.MM.dd");
+			String nowDay = dtFormat.format(date);
 			
 			// 첨부 파일
 			List<MailAttachFileVO> resultFileList = careerApplyService.selectCareerApplyFileList(careerApplyVO);
@@ -83,7 +89,7 @@ public class CareerApplyController {
 				mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "홈페이지시스템"));
 				//mailVO.setToAddress(vo.getReceive_mail());
 				mailVO.setToInternetAddress(new InternetAddress(vo.getReceive_mail(), vo.getReceive_nm()));
-				mailVO.setMailSubject("[제일엠앤에스] 채용지원접수 - " + StringUtil.str2html(careerApplyVO.getApply_nm()));
+				mailVO.setMailSubject("[제일엠앤에스] " + StringUtil.str2html(careerApplyVO.getApply_nm()) + "님의 채용지원이 접수 되었습니다.");
 				mailVO.setTemplateView("layout/mail/career-apply-manager");
 				
 				// 메일 본문
@@ -115,8 +121,18 @@ public class CareerApplyController {
 				contentList.add(mailContentVO);
 				
 				mailContentVO = new MailContentVO();
-				mailContentVO.setContentKey("reg_dt");
-				mailContentVO.setContentValue(formatedNow);
+				mailContentVO.setContentKey("apply_day");
+				mailContentVO.setContentValue(nowDay);
+				contentList.add(mailContentVO);
+				
+				mailContentVO = new MailContentVO();
+				mailContentVO.setContentKey("managerUrl");
+				mailContentVO.setContentValue(managerUrl);
+				contentList.add(mailContentVO);
+				
+				mailContentVO = new MailContentVO();
+				mailContentVO.setContentKey("resourceUrl");
+				mailContentVO.setContentValue(resourceUrl);
 				contentList.add(mailContentVO);
 				
 				// 첨부파일
@@ -130,7 +146,7 @@ public class CareerApplyController {
 			MailVO mailApplyVO = new MailVO();
 			mailApplyVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
 			mailApplyVO.setToInternetAddress(new InternetAddress(careerApplyVO.getApply_mail(), careerApplyVO.getApply_nm()));
-			mailApplyVO.setMailSubject("[제일엠앤에스] 채용지원접수 - " + StringUtil.str2html(careerApplyVO.getApply_nm()));
+			mailApplyVO.setMailSubject("[제일엠앤에스] " + StringUtil.str2html(careerApplyVO.getApply_nm()) + "님, 채용지원이 정상접수 되었습니다.");
 			mailApplyVO.setTemplateView("layout/mail/career-apply-user");
 			
 			// 메일 본문
@@ -162,8 +178,18 @@ public class CareerApplyController {
 			contentList.add(mailContentVO);
 			
 			mailContentVO = new MailContentVO();
-			mailContentVO.setContentKey("reg_dt");
-			mailContentVO.setContentValue(formatedNow);
+			mailContentVO.setContentKey("apply_day");
+			mailContentVO.setContentValue(nowDay);
+			contentList.add(mailContentVO);
+			
+			mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("managerUrl");
+			mailContentVO.setContentValue(managerUrl);
+			contentList.add(mailContentVO);
+			
+			mailContentVO = new MailContentVO();
+			mailContentVO.setContentKey("resourceUrl");
+			mailContentVO.setContentValue(resourceUrl);
 			contentList.add(mailContentVO);
 			
 			// 첨부파일

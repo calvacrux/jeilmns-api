@@ -1,38 +1,220 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>채용정보 지원메일</title>
-</head>
-<body>
-<div>
-	<h1 style="font-size: 22px; line-height: 160%;">
-		채용지원 접수안내
-	</h1>
-	<p style="font-size: 14px; line-height: 160%;">
-		제일엠앤에스 홈페이지에서 채용지원이 접수되었습니다.
-		<br>		
-		관리자 채용지원 관리에서도 확인할 수 있으며 검토여부가 완료되면 검토여부를 업데이트 바랍니다.
-	</p>
-	<p style="font-size: 14px; line-height: 160%;">
-		* 지원직무: <span th:text="${positoin_cat_nm}"></span>
-		<br>
-		* 이름: <span th:text="${apply_nm}"></span>
-		<br>
-		* 전화: <span th:text="${apply_tel}"></span>
-		<br>
-		* 메일: <span th:text="${apply_mail}"></span>
-		<br>
-		* 지원개요:
-		<br> 
-		<span th:utext="${apply_content}"></span>
-		<br>
-		* 지원일자: <span th:text="${reg_dt}"></span>
-	</p>
-	<hr>
-	<p style="font-size: 12px; line-height: 160%;">
-		2024 © 제일엠앤에스
-	</p>
-</div>
-</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>채용공고 지원접수 알림 | 제일엠앤에스</title>
+  </head>
+
+  <body>
+    <!-- Outer Container -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+          <!-- Contents Container (600px) -->
+          <table border="0" cellpadding="0" cellspacing="0" width="600" style="width:600px; background-color:#ffffff;">
+            <!-- header -->
+            <tr>
+              <td height="60" style="font-size:0; line-height:0;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td width="40" style="font-size:0; line-height:0;">&nbsp;</td>
+                    <td height="30">
+                      <img th:src="${resourceUrl} + '/images/email/logo_head.png'" width="150" height="30" alt="JEIL M&amp;S" style="border:0; vertical-align:top;" />
+                    </td>
+                    <td width="40" style="font-size:0; line-height:0;">&nbsp;</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <!-- //header -->
+
+            <!-- content -->
+            <tr>
+              <td height="100" style="font-size:0; line-height:0;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td width="40">&nbsp;</td>
+                    <td>
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                          <td>
+                            <b style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:36px; line-height:1.3; letter-spacing:-0.72px; color:#221a19;">
+                              채용지원이 접수 되었습니다.<br />
+                              내용을 확인해주세요
+                            </b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="20" style="font-size:0; line-height:0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <font style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:20px; line-height:1.3; letter-spacing:-0.4px; color:#7a7675;">
+                              관리자시스템을 통해 접수된 지원 내역을<br />
+                              확인하실 수 있습니다.
+                            </font>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="60" style="font-size:0; line-height:0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                              <tr>
+                              	<td height="4" th:style="|width:50%; background-image:url(${resourceUrl}/images/email/bg_line.png); background-position:top left; background-repeat:no-repeat; font-size:0; line-height:0;|">&nbsp;</td>
+                                <td height="4" th:style="|width:50%; background-image:url(${resourceUrl}/images/email/bg_line.png); background-position:top right; background-repeat:no-repeat; font-size:0; line-height:0;|">&nbsp;</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="40" style="font-size:0; line-height:0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                              <tr>
+                                <td style="width:100px;">
+                                  <b style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:18px; line-height:1.55; letter-spacing:-0.36px; color:#221a19;">
+                                    등록일자
+                                  </b>
+                                </td>
+                                <td align="right" style="text-align:right;">
+                                  <font style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:18px; line-height:1.55; letter-spacing:-0.18px; color:#4e4847;" th:text="${apply_day}">
+                                  </font>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td height="20" style="font-size:0; line-height:0;">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td style="width:100px;">
+                                  <b style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:18px; line-height:1.55; letter-spacing:-0.36px; color:#221a19;">
+                                    등록자
+                                  </b>
+                                </td>
+                                <td align="right" style="text-align:right;">
+                                  <font style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:18px; line-height:1.55; letter-spacing:-0.18px; color:#4e4847;" th:text="${apply_nm}">
+                                  </font>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td height="20" style="font-size:0; line-height:0;">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td style="width:100px;">
+                                  <b style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:18px; line-height:1.55; letter-spacing:-0.36px; color:#221a19;">
+                                    이메일
+                                  </b>
+                                </td>
+                                <td align="right" style="text-align:right;">
+                                  <font style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:18px; line-height:1.55; letter-spacing:-0.18px; color:#4e4847;" th:text="${apply_mail}">
+                                  </font>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="40" style="font-size:0; line-height:0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td height="1" style="font-size:0; line-height:0; background:#e9e8e8;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td height="40" style="font-size:0; line-height:0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <b style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:20px; line-height:1.4; letter-spacing:-0.4px; color:#221a19;">
+                              지원내용
+                            </b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="20" style="font-size:0; line-height:0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <font style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:20px; line-height:1.4; letter-spacing:-0.4px; color:#4e4847;" th:utext="${apply_content}">
+                            </font>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="40" style="font-size:0; line-height:0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td height="1" style="font-size:0; line-height:0; background:#e9e8e8;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td height="60" style="font-size:0; line-height:0;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="center" style="text-align:center;">
+                            <a th:href="${managerUrl}" target="_blank" rel="noopener noreferrer" th:style="|display:inline-block; padding-right:54px; text-decoration:none; background-image:url(${resourceUrl}/images/email/bg_custom_button_head.png); background-position:top right; background-repeat:no-repeat;|">
+                              <span th:style="|display:inline-block; height:62px; padding-left:40px; font-family:'Pretendard',sans-serif; font-size:20px; font-weight:bold; line-height:62px; letter-spacing:-0.4px; color:#ffffff; background-image:url(${resourceUrl}/images/email/bg_custom_button_body.png); background-position:top left; background-repeat:no-repeat; vertical-align:top;|">
+                                관리자시스템 바로가기
+                              </span>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td width="40">&nbsp;</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td height="100" style="font-size:0; line-height:0;">&nbsp;</td>
+            </tr>
+            <!-- //content -->
+
+            <!-- footer -->
+            <tr>
+              <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#111111;">
+                  <tr>
+                    <td height="60" style="font-size:0; line-height:0;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td width="40">&nbsp;</td>
+                    <td>
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                          <td style="width:150px;">
+                            <img th:src="${resourceUrl} + '/images/email/logo_footer.png'" width="150" height="30" alt="JEIL M&amp;S" style="border:0; vertical-align:top;" />
+                          </td>
+                          <td align="right" style="text-align:right;">
+                            <font style="display:inline-block; font-family:'Pretendard',sans-serif; font-size:16px; line-height:1.3; letter-spacing:-0.32px; color:#a7a3a3;">
+                              &copy; 2024. All rights reserved
+                            </font>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td width="40">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td height="60" style="font-size:0; line-height:0;">&nbsp;</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <!-- //footer -->
+          </table>
+          <!-- //Contents Container (600px) -->
+        </td>
+      </tr>
+    </table>
+    <!-- //Outer Container -->
+  </body>
 </html>
