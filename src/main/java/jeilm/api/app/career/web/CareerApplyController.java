@@ -142,6 +142,8 @@ public class CareerApplyController {
 				mailService.sendMail(mailVO);
 			}
 			
+			System.out.println("채용지원 메일발송 사용자 - 시작");
+			
 			// 메일 발송 - 지원자
 			MailVO mailApplyVO = new MailVO();
 			mailApplyVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
@@ -197,6 +199,8 @@ public class CareerApplyController {
 			mailApplyVO.setContentList(contentList);
 			
 			mailService.sendMail(mailApplyVO);
+			
+			System.out.println("채용지원 메일발송 사용자 - 종료");
 		}
 		
 		map.put("result_code", resultCode);
