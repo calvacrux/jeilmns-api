@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jeilm.api.app.history.service.HistoryGroupService;
 import jeilm.api.app.history.service.HistoryService;
+import jeilm.api.app.history.vo.HistoryGroupVO;
 import jeilm.api.app.history.vo.HistoryVO;
 import jeilm.api.cmm.json.JsonResult;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class HistoryController {
 
 	private final HistoryService historyService;
+	private final HistoryGroupService historyGroupService;
 	
 	/**
 	 * 연혁 리스트
@@ -36,19 +39,34 @@ public class HistoryController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		historyVO.setLang(historyVO.getLang());
-		List<HistoryVO> resultList = new ArrayList<HistoryVO>();
+		List<HistoryVO> resultHistoryList = new ArrayList<HistoryVO>();
+		
+		HistoryGroupVO historyGroupVO = new HistoryGroupVO();
+		historyGroupVO.setLang(historyVO.getLang());
+		List<HistoryGroupVO> resultHistoryGroupList = new ArrayList<HistoryGroupVO>();
 		
 		if (historyVO.getLang().equals("ko")) {
-			resultList = historyService.selectHistoryListKo(historyVO);
+			resultHistoryList = historyService.selectHistoryListKo(historyVO);
 		} else if (historyVO.getLang().equals("en")) {
-			resultList = historyService.selectHistoryListEn(historyVO);
+			resultHistoryList = historyService.selectHistoryListEn(historyVO);
 		} else if (historyVO.getLang().equals("cn")) {
-			resultList = historyService.selectHistoryListCn(historyVO);
+			resultHistoryList = historyService.selectHistoryListCn(historyVO);
 		} else {
 			return JsonResult.fail("언어설정이 올바르지 않습니다.");
 		}
 		
-		map.put("history_list", resultList);
+		if (historyGroupVO.getLang().equals("ko")) {
+			resultHistoryGroupList = historyGroupService.selectHistoryGroupListKo(historyGroupVO);
+		} else if (historyGroupVO.getLang().equals("en")) {
+			resultHistoryGroupList = historyGroupService.selectHistoryGroupListEn(historyGroupVO);
+		} else if (historyGroupVO.getLang().equals("cn")) {
+			resultHistoryGroupList = historyGroupService.selectHistoryGroupListCn(historyGroupVO);
+		} else {
+			return JsonResult.fail("언어설정이 올바르지 않습니다.");
+		}
+		
+		map.put("history_list", resultHistoryList);
+		map.put("group_list", resultHistoryGroupList);
 		
 		return JsonResult.success(map);		
 	}

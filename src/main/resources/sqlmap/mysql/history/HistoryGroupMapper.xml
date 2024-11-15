@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.history.service.mapper.HistoryGroupMapper">
+
+	<select id="selectHistoryGroupListKo" resultType="jeilm.api.app.history.vo.HistoryGroupVO">
+		<![CDATA[
+			/* selectHistoryGroupListKo */
+			SELECT
+				A.GROUP_START_YEAR
+				, A.GROUP_END_YEAR
+				, A.GROUP_TITLE_KO AS GROUP_TITLE
+				, A.GROUP_SUBTITLE_KO AS GROUP_SUBTITLE
+			FROM
+				TB_HISTORY_GROUP A
+			WHERE
+				A.USE_STATE = 'Y'
+			ORDER BY
+				A.GROUP_START_YEAR DESC
+		]]>
+	</select>
+	
+	<select id="selectHistoryGroupListEn" resultType="jeilm.api.app.history.vo.HistoryGroupVO">
+		<![CDATA[
+			/* selectHistoryGroupListEn */
+			SELECT
+				A.GROUP_START_YEAR
+				, A.GROUP_END_YEAR
+				, A.GROUP_TITLE_EN AS GROUP_TITLE
+				, A.GROUP_SUBTITLE_EN AS GROUP_SUBTITLE
+			FROM
+				TB_HISTORY_GROUP A
+			WHERE
+				A.USE_STATE = 'Y'
+			ORDER BY
+				A.GROUP_START_YEAR DESC
+		]]>
+	</select>
+	
+	<select id="selectHistoryGroupListCn" resultType="jeilm.api.app.history.vo.HistoryGroupVO">
+		<![CDATA[
+			/* selectHistoryGroupListCn */
+			SELECT
+				A.GROUP_START_YEAR
+				, A.GROUP_END_YEAR
+				, A.GROUP_TITLE_CN AS GROUP_TITLE
+				, A.GROUP_SUBTITLE_CN AS GROUP_SUBTITLE
+			FROM
+				TB_HISTORY_GROUP A
+			WHERE
+				A.USE_STATE = 'Y'
+			ORDER BY
+				A.GROUP_START_YEAR DESC
+		]]>
+	</select>
+	
+</mapper>
