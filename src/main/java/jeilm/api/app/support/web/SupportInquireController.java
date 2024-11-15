@@ -165,7 +165,19 @@ public class SupportInquireController {
 			mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
 			mailVO.setToInternetAddress(new InternetAddress(supportInquireVO.getCustomer_mail(), supportInquireVO.getCustomer_nm()));
 			mailVO.setMailSubject("[제일엠앤에스] 문의접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
-			mailVO.setTemplateView("layout/mail/inquire-request-user");
+			
+			// 언어분기
+			String lang = supportInquireVO.getLang();
+			switch (lang) {
+				case "ko": mailVO.setTemplateView("layout/mail/inquire-request-user-ko");
+					break;
+				case "en": mailVO.setTemplateView("layout/mail/inquire-request-user-en");
+					break;
+				case "cn": mailVO.setTemplateView("layout/mail/inquire-request-user-cn");
+					break;
+				default: mailVO.setTemplateView("layout/mail/inquire-request-user-ko");
+					break;
+			}
 			
 			// 메일 본문
 			List<MailContentVO> contentList = new ArrayList<MailContentVO>();

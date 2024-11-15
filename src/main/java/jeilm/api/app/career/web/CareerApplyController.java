@@ -147,7 +147,19 @@ public class CareerApplyController {
 			mailApplyVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
 			mailApplyVO.setToInternetAddress(new InternetAddress(careerApplyVO.getApply_mail(), careerApplyVO.getApply_nm()));
 			mailApplyVO.setMailSubject("[제일엠앤에스] " + StringUtil.str2html(careerApplyVO.getApply_nm()) + "님, 채용지원이 정상접수 되었습니다.");
-			mailApplyVO.setTemplateView("layout/mail/career-apply-user");
+			
+			// 언어분기
+			String lang = careerApplyVO.getLang();
+			switch (lang) {
+				case "ko": mailApplyVO.setTemplateView("layout/mail/career-apply-user-ko");
+					break;
+				case "en": mailApplyVO.setTemplateView("layout/mail/career-apply-user-en");
+					break;
+				case "cn": mailApplyVO.setTemplateView("layout/mail/career-apply-user-cn");
+					break;
+				default: mailApplyVO.setTemplateView("layout/mail/career-apply-user-ko");
+					break;
+			}
 			
 			// 메일 본문
 			List<MailContentVO> contentList = new ArrayList<MailContentVO>();

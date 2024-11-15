@@ -17,5 +17,8 @@ public class SupportInquireVO implements Serializable {
 	private String customer_mail;		// 고객 메일
 	private String inquire_title;		// 문의 제목 
 	private String inquire_content;		// 문의 내용
+	
+	// 언어
+	private String lang;				// 언어
 		
 }

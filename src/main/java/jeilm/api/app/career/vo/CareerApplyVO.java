@@ -16,5 +16,7 @@ public class CareerApplyVO implements Serializable {
 	private String apply_tel;					// 채용지원 전화
 	private String apply_mail;					// 채용지원 메일
 	private String apply_content;				// 채용지원 내용
-	
+
+	// 언어
+	private String lang;				// 언어
 }

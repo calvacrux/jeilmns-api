@@ -17,4 +17,6 @@ public class EthicsInquireVO implements Serializable {
 	private String inquire_title;		// 윤리경영 제목 
 	private String inquire_content;		// 윤리경영 내용
 	
+	// 언어
+	private String lang;				// 언어
 }
