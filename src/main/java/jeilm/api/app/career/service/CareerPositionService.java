@@ -2,6 +2,7 @@ package jeilm.api.app.career.service;
 
 import java.util.List;
 
+import jeilm.api.app.career.vo.CareerPositionTitleVO;
 import jeilm.api.app.career.vo.CareerPositionVO;
 
 public interface CareerPositionService {
@@ -21,5 +22,13 @@ public interface CareerPositionService {
 	 * @throws Exception
 	 */
 	List<CareerPositionVO> selectPositionList(CareerPositionVO careerPositionVO) throws Exception;
+	
+	/**
+	 * 채용공고 리스트 - 제목
+	 * @param careerPositionVO
+	 * @return
+	 * @throws Exception
+	 */
+	List<CareerPositionTitleVO> selectPositionTitleList(CareerPositionTitleVO careerPositionTitleVO) throws Exception;
 	
 }

@@ -16,6 +16,7 @@ public class CareerPositionVO implements Serializable {
 	
 	// 기본
 	private String position_sn;				// 채용공고 번호
+	private String position_title;			// 채용공고 제목
 	@JsonIgnore
 	private String position_id;				// 채용공고 아이디
 	@JsonIgnore

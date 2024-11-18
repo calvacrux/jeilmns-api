@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import jeilm.api.app.career.service.CareerPositionService;
 import jeilm.api.app.career.service.mapper.CareerPositionMapper;
+import jeilm.api.app.career.vo.CareerPositionTitleVO;
 import jeilm.api.app.career.vo.CareerPositionVO;
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,11 @@ public class CareerPositionServiceImpl implements CareerPositionService {
 	@Override
 	public List<CareerPositionVO> selectPositionList(CareerPositionVO careerPositionVO) throws Exception {
 		return careerPositionMapper.selectPositionList(careerPositionVO);
+	}
+	
+	@Override
+	public List<CareerPositionTitleVO> selectPositionTitleList(CareerPositionTitleVO careerPositionTitleVO) throws Exception {
+		return careerPositionMapper.selectPositionTitleList(careerPositionTitleVO);
 	}
 
 }
