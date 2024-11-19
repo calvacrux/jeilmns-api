@@ -41,6 +41,7 @@ public class ProductCategoryController {
 			productCategoryVO.setCategory_id("category.en");
 		} else if (productCategoryVO.getLang().equals("cn")) {
 			productCategoryVO.setCategory_id("category.cn");
+		} else {
 			return JsonResult.fail("언어설정이 올바르지 않습니다.");
 		}
 		
