@@ -24,6 +24,15 @@ public class CareerPositionVO implements Serializable {
 	private String position_desc;			// 채용공고 직무설명
 	private String position_require;		// 채용공고 자격요전
 	
+	@JsonIgnore
+	private String receive_nm_first;		// 메일수신 이름 1
+	@JsonIgnore
+	private String receive_mail_first;		// 메일수신 메일 1
+	@JsonIgnore
+	private String receive_nm_second;		// 메일수신 이름 2
+	@JsonIgnore
+	private String receive_mail_second;		// 메일수신 이름 2
+	
 	// 조인 - 카테고리
 	private String position_cat_nm;			// 카테고리 이름
 	

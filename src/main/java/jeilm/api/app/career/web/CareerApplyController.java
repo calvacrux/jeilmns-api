@@ -1,4 +1,4 @@
-package jeilm.api.app.career.web;
+ package jeilm.api.app.career.web;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jeilm.api.app.career.service.CareerApplyService;
 import jeilm.api.app.career.service.CareerPositionService;
-import jeilm.api.app.career.service.CareerReceiveService;
 import jeilm.api.app.career.vo.CareerApplyVO;
 import jeilm.api.app.career.vo.CareerPositionVO;
 import jeilm.api.app.career.vo.CareerReceiveVO;
@@ -47,7 +46,7 @@ public class CareerApplyController {
 	
 	private final CareerApplyService careerApplyService;
 	private final CareerPositionService careerPositionService;
-	private final CareerReceiveService careerReceiveService;
+	// private final CareerReceiveService careerReceiveService;
 	private final MailService mailService;
 	
 	@PostMapping("/v1/career/apply")
@@ -80,8 +79,25 @@ public class CareerApplyController {
 			List<MailAttachFileVO> resultFileList = careerApplyService.selectCareerApplyFileList(careerApplyVO);
 						
 			// 메일 발송 - 관리자
-			CareerReceiveVO receiveVO = new CareerReceiveVO();
-			List<CareerReceiveVO> resultList = careerReceiveService.selectReceiveList(receiveVO);
+			// CareerReceiveVO receiveVO = new CareerReceiveVO();
+			// List<CareerReceiveVO> resultList = careerReceiveService.selectReceiveList(receiveVO);
+			
+			// 메일 발송 - 채용공고 수신자
+			List<CareerReceiveVO> resultList = new ArrayList<CareerReceiveVO>();
+			
+			if (!careerPositionVO.getReceive_nm_first().isEmpty() && !careerPositionVO.getReceive_mail_first().isEmpty()) {
+				CareerReceiveVO receiveVO = new CareerReceiveVO();
+				receiveVO.setReceive_nm(careerPositionVO.getReceive_nm_first());
+				receiveVO.setReceive_mail(careerPositionVO.getReceive_mail_first());
+				resultList.add(receiveVO);
+			}
+			
+			if (!careerPositionVO.getReceive_nm_second().isEmpty() && !careerPositionVO.getReceive_mail_second().isEmpty()) {
+				CareerReceiveVO receiveVO = new CareerReceiveVO();
+				receiveVO.setReceive_nm(careerPositionVO.getReceive_nm_second());
+				receiveVO.setReceive_mail(careerPositionVO.getReceive_mail_second());
+				resultList.add(receiveVO);
+			}
 			
 			for (CareerReceiveVO vo : resultList) {
 				MailVO mailVO = new MailVO();
