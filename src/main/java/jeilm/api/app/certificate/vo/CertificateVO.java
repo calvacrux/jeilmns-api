@@ -21,6 +21,7 @@ public class CertificateVO implements Serializable {
 	private String certificate_cat_nm;			// 인증서 카테고리 이름
 	private String certificate_title;			// 인증서 제목
 	private String certificate_desc;			// 인증서 설명
+	private String certificate_day;				// 주요일자
 	private String major_yn;					// 주요 인증서 여부
 	
 	// 파일 - 썸네일
