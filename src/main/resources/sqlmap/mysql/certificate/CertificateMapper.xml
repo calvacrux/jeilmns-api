@@ -11,6 +11,7 @@
 				, B.CODE_NM AS CERTIFICATE_CAT_NM
 				, A.CERTIFICATE_TITLE 
 				, A.CERTIFICATE_DESC 
+				, A.MAJOR_YN
 				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_USER_NM_THUMB
 				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_PATH_THUMB
 				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.CERTIFICATE_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'main') AS FILE_USER_NM_MAIN
@@ -25,6 +26,9 @@
 		]]>
 			<if test='certificate_cat != null and !certificate_cat.equals("")'>
 				AND A.CERTIFICATE_CAT = #{certificate_cat} 
+			</if>
+			<if test='major_yn != null and !major_yn.equals("")'>
+				AND A.MAJOR_YN = #{major_yn} 
 			</if>
 			<if test='certificate_cat_list != null and certificate_cat_list.length != 0'>
 				AND A.CERTIFICATE_CAT IN 
