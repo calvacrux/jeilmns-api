@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jeilm.api.app.main.service.mapper.MainGnbMapper">
+
+	<select id="selectMainGnbList" resultType="jeilm.api.app.main.vo.MainGnbListVO">
+		<![CDATA[
+			/* selectMainGnbList */
+			SELECT
+				A.CATEGORY_ID AS MENU_TYPE
+				, A.SORT_NO AS SORT_NO
+				, RIGHT(A.CATEGORY_ID, 2) AS LANG
+				, A.CATEGORY_SN AS MENU_ID
+				, A.CATEGORY_NM AS MENU_NM
+			FROM
+				TB_PRODUCT_CATEGORY A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+			UNION ALL 
+			SELECT
+				A.P_CODE_ID AS MENU_TYPE
+				, A.CODE_SORT AS SORT_NO
+				, RIGHT(A.P_CODE_ID, 2) AS LANG
+				, A.CODE_ID AS MENU_ID
+				, A.CODE_NM AS MENU_NM
+			FROM	
+				TB_CODE A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND LEFT(A.P_CODE_ID, 9) = 'code.cert'	
+			UNION ALL 
+			SELECT
+				A.P_CODE_ID AS MENU_TYPE
+				, A.CODE_SORT AS SORT_NO
+				, RIGHT(A.P_CODE_ID, 2) AS LANG
+				, A.CODE_ID AS MENU_ID
+				, A.CODE_NM AS MENU_NM
+			FROM	
+				TB_CODE A
+			WHERE
+				A.USE_STATE = 'Y'
+				AND LEFT(A.P_CODE_ID, 9) = 'code.news'	
+			ORDER BY
+				MENU_TYPE DESC, SORT_NO ASC
+		]]>
+	</select>
+	
+</mapper>
