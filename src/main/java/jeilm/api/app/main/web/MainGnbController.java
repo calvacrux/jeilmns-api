@@ -24,7 +24,7 @@ public class MainGnbController {
 	
 	private final MainGnbService mainGnbService;
 	
-	@PostMapping("/vi/main/gnb/list")
+	@PostMapping("/v1/main/gnb/list")
 	public ResponseEntity<?> getMainGnbList(@RequestBody MainGnbListVO mainGnbListVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
