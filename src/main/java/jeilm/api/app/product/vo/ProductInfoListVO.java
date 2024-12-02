@@ -18,7 +18,7 @@ public class ProductInfoListVO implements Serializable {
 	private String info_sn;						// 정보 일련번호
 	private String category_sn;					// 카테고리 번호
 	private String info_title;					// 정보 타이틀
-	private String info_desc_sub;				// 정보 설명 서브
+	private String info_title_sub;				// 정보 타이틀 서브
 	
 	// 조인 - 카테고리
 	@JsonIgnore
