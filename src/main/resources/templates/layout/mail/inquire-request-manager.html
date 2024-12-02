@@ -161,10 +161,8 @@
                         </tr>
                         <tr>
                           <td align="center" style="text-align:center;">
-                            <a th:href="${managerUrl}" target="_blank" rel="noopener noreferrer" th:style="|display:inline-block; padding-right:54px; text-decoration:none; background-image:url(${resourceUrl}/images/email/bg_custom_button_head.png); background-position:top right; background-repeat:no-repeat;|">
-                              <span th:style="|display:inline-block; height:62px; padding-left:40px; font-family:'Pretendard',sans-serif; font-size:20px; font-weight:bold; line-height:62px; letter-spacing:-0.4px; color:#ffffff; background-image:url(${resourceUrl}/images/email/bg_custom_button_body.png); background-position:top left; background-repeat:no-repeat; vertical-align:top;|">
-                                관리자시스템 바로가기
-                              </span>
+                             <a th:href="${managerUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;">
+                              <img th:src="${resourceUrl} + '/images/email/btn_mail_custom01.png'" width="270" height="62" alt="관리자시스템 바로가기" style="display:inline-block; border:0; vertical-align:top;" />
                             </a>
                           </td>
                         </tr>
