@@ -164,18 +164,25 @@ public class SupportInquireController {
 			MailVO mailVO = new MailVO();
 			mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
 			mailVO.setToInternetAddress(new InternetAddress(supportInquireVO.getCustomer_mail(), supportInquireVO.getCustomer_nm()));
-			mailVO.setMailSubject("[제일엠앤에스] 문의접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
-			
+						
 			// 언어분기
 			String lang = supportInquireVO.getLang();
 			switch (lang) {
-				case "ko": mailVO.setTemplateView("layout/mail/inquire-request-user-ko");
+				case "ko": 
+					mailVO.setTemplateView("layout/mail/inquire-request-user-ko");
+					mailVO.setMailSubject("[제일엠앤에스] 문의접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
 					break;
-				case "en": mailVO.setTemplateView("layout/mail/inquire-request-user-en");
+				case "en": 
+					mailVO.setTemplateView("layout/mail/inquire-request-user-en");
+					mailVO.setMailSubject("[Jeil M&S] Inquiry Received - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
 					break;
-				case "cn": mailVO.setTemplateView("layout/mail/inquire-request-user-cn");
+				case "cn": 
+					mailVO.setTemplateView("layout/mail/inquire-request-user-cn");
+					mailVO.setMailSubject("[Jeil M&S] 查询已收到 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
 					break;
-				default: mailVO.setTemplateView("layout/mail/inquire-request-user-ko");
+				default: 
+					mailVO.setTemplateView("layout/mail/inquire-request-user-ko");
+					mailVO.setMailSubject("[제일엠앤에스] 문의접수 - " + StringUtil.str2html(supportInquireVO.getInquire_title()));
 					break;
 			}
 			

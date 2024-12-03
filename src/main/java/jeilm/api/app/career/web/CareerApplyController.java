@@ -162,18 +162,25 @@ public class CareerApplyController {
 			MailVO mailApplyVO = new MailVO();
 			mailApplyVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
 			mailApplyVO.setToInternetAddress(new InternetAddress(careerApplyVO.getApply_mail(), careerApplyVO.getApply_nm()));
-			mailApplyVO.setMailSubject("[제일엠앤에스] " + StringUtil.str2html(careerApplyVO.getApply_nm()) + "님, 채용지원이 정상접수 되었습니다.");
 			
 			// 언어분기
 			String lang = careerApplyVO.getLang();
 			switch (lang) {
-				case "ko": mailApplyVO.setTemplateView("layout/mail/career-apply-user-ko");
+				case "ko": 
+					mailApplyVO.setTemplateView("layout/mail/career-apply-user-ko");
+					mailApplyVO.setMailSubject("[제일엠앤에스] " + StringUtil.str2html(careerApplyVO.getApply_nm()) + "님, 채용지원이 정상접수 되었습니다.");
 					break;
-				case "en": mailApplyVO.setTemplateView("layout/mail/career-apply-user-en");
+				case "en": 
+					mailApplyVO.setTemplateView("layout/mail/career-apply-user-en");
+					mailApplyVO.setMailSubject("[Jeil M&S] Dear " + StringUtil.str2html(careerApplyVO.getApply_nm()) + ", Your job application has been received successfully.");
 					break;
-				case "cn": mailApplyVO.setTemplateView("layout/mail/career-apply-user-cn");
+				case "cn": 
+					mailApplyVO.setTemplateView("layout/mail/career-apply-user-cn");
+					mailApplyVO.setMailSubject("[Jeil M&S] 亲爱的" + StringUtil.str2html(careerApplyVO.getApply_nm()) + ", 您的求职申请已成功收到");
 					break;
-				default: mailApplyVO.setTemplateView("layout/mail/career-apply-user-ko");
+				default: 
+					mailApplyVO.setTemplateView("layout/mail/career-apply-user-ko");
+					mailApplyVO.setMailSubject("[제일엠앤에스] " + StringUtil.str2html(careerApplyVO.getApply_nm()) + "님, 채용지원이 정상접수 되었습니다.");
 					break;
 			}
 			

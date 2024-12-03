@@ -146,18 +146,25 @@ public class EthicsInquireController {
 			MailVO mailVO = new MailVO();
 			mailVO.setFromInternetAddress(new InternetAddress(fromMailAddress, "제일엠앤에스"));
 			mailVO.setToInternetAddress(new InternetAddress(ethicsInquireVO.getCustomer_mail(), ethicsInquireVO.getCustomer_nm()));
-			mailVO.setMailSubject("[제일엠앤에스] 윤리경영접수 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
 			
 			// 언어분기
 			String lang = ethicsInquireVO.getLang();
 			switch (lang) {
-				case "ko": mailVO.setTemplateView("layout/mail/ethics-request-user-ko");
+				case "ko": 
+					mailVO.setTemplateView("layout/mail/ethics-request-user-ko");
+					mailVO.setMailSubject("[제일엠앤에스] 윤리경영접수 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
 					break;
-				case "en": mailVO.setTemplateView("layout/mail/ethics-request-user-en");
+				case "en": 
+					mailVO.setTemplateView("layout/mail/ethics-request-user-en");
+					mailVO.setMailSubject("[Jeil M&S] Ethics Violation Report - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
 					break;
-				case "cn": mailVO.setTemplateView("layout/mail/ethics-request-user-cn");
+				case "cn": 
+					mailVO.setTemplateView("layout/mail/ethics-request-user-cn");
+					mailVO.setMailSubject("[Jeil M&S] 道德违规举报已收到 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
 					break;
-				default: mailVO.setTemplateView("layout/mail/ethics-request-user-ko");
+				default: 
+					mailVO.setTemplateView("layout/mail/ethics-request-user-ko");
+					mailVO.setMailSubject("[제일엠앤에스] 윤리경영접수 - " + StringUtil.str2html(ethicsInquireVO.getInquire_title()));
 					break;
 			}
 			
