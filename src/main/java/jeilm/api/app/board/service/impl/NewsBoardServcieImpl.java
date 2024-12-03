@@ -37,6 +37,11 @@ public class NewsBoardServcieImpl implements NewsBoardService {
 	public List<NewsBoardListVO> selectPostList(NewsBoardListVO newsBoardListVO) throws Exception {
 		return newsBoardMapper.selectPostList(newsBoardListVO);
 	}
+	
+	@Override
+	public List<NewsBoardListVO> selectPostListForMain(NewsBoardListVO newsBoardListVO) throws Exception {
+		return newsBoardMapper.selectPostListForMain(newsBoardListVO);
+	}
 
 	@Override
 	public int selectPostCount(NewsBoardListVO newsBoardListVO) throws Exception {

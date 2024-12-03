@@ -40,6 +40,14 @@ public interface DisclosureService {
 	 * @throws Exception
 	 */
 	List<DisclosureListVO> selectPostList(DisclosureListVO disclosureListVO) throws Exception;
+	
+	/**
+	 * 포스트 리스트 조회 - 메인
+	 * @param disclosureListVO
+	 * @return
+	 * @throws Exception
+	 */
+	List<DisclosureListVO> selectPostListForMain(DisclosureListVO disclosureListVO) throws Exception;
 
 	/**
 	 * 포스트 카운트 조회

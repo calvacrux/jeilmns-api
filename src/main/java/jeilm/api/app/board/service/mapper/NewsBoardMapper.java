@@ -45,6 +45,14 @@ public interface NewsBoardMapper {
 	List<NewsBoardListVO> selectPostList(NewsBoardListVO newsBoardListVO) throws Exception;
 	
 	/**
+	 * 포스트 리스트 조회 - 메인
+	 * @param newsBoardListVO
+	 * @return
+	 * @throws Exception
+	 */
+	List<NewsBoardListVO> selectPostListForMain(NewsBoardListVO newsBoardListVO) throws Exception;
+	
+	/**
 	 * 포스트 카운트 조회
 	 * @param newsBoardListVO
 	 * @return

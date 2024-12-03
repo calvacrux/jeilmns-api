@@ -39,6 +39,11 @@ public class DisclosureServiceImpl implements DisclosureService {
 	}
 	
 	@Override
+	public List<DisclosureListVO> selectPostListForMain(DisclosureListVO disclosureListVO) throws Exception {
+		return disclosureMapper.selectPostListForMain(disclosureListVO);
+	}
+	
+	@Override
 	public int selectPostCount(DisclosureListVO disclosureListVO) throws Exception {
 		return disclosureMapper.selectPostCount(disclosureListVO);
 	}

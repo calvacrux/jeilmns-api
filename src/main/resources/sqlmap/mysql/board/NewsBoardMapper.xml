@@ -147,6 +147,35 @@
 		]]>
 	</select>
 	
+	<select id="selectPostListForMain" resultType="jeilm.api.app.board.vo.NewsBoardListVO">
+		<![CDATA[
+			/* selectPostListForMain */
+			SELECT
+				A.POST_SN
+				, A.POST_CAT
+				, B.CODE_NM AS POST_CAT_NM
+				, A.POST_TITLE
+				, A.VIEW_CNT
+				, A.REG_DT
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_USER_NM_THUMB
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'thumb') AS FILE_PATH_THUMB
+				, (SELECT FILE_USER_NM FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'attach') AS FILE_USER_NM_ATTACH
+				, (SELECT FILE_PATH FROM TB_FILE F WHERE F.FILE_DATA_SN = A.POST_SN AND F.USE_STATE = 'Y' AND F.FILE_CONTENT_CD = 'attach') AS FILE_PATH_ATTACH
+			FROM
+				TB_BOARD_POST A
+				INNER JOIN TB_CODE B ON (B.CODE_ID = A.POST_CAT)
+			WHERE
+				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
+				AND B.USE_STATE = 'Y'
+				AND A.BOARD_ID = #{board_id}
+			ORDER BY
+				A.POST_SN DESC
+			LIMIT 
+				3
+		]]>
+	</select>
+	
 	<select id="selectPostCount" resultType="int">
 		<![CDATA[
 			/* selectPostCount */
