@@ -26,6 +26,7 @@
 				A.USE_STATE = 'Y'
 				AND A.DISPLAY_YN = 'Y'
 				AND B.USE_STATE = 'Y'
+				AND B.DISPLAY_YN = 'Y'
 				AND A.POST_SN = #{post_sn}
 		]]>
 	</select>
@@ -44,6 +45,7 @@
 				A.USE_STATE = 'Y'
 				AND A.DISPLAY_YN = 'Y'
 				AND B.USE_STATE = 'Y'
+				AND B.DISPLAY_YN = 'Y'
 				AND A.BOARD_ID = #{board_id}
 				AND A.POST_SN > #{post_sn}
 		]]>
@@ -81,6 +83,7 @@
 				A.USE_STATE = 'Y'
 				AND A.DISPLAY_YN = 'Y'
 				AND B.USE_STATE = 'Y'
+				AND B.DISPLAY_YN = 'Y'
 				AND A.BOARD_ID = #{board_id}
 				AND A.POST_SN < #{post_sn}
 		]]>
@@ -125,6 +128,7 @@
 				A.USE_STATE = 'Y'
 				AND A.DISPLAY_YN = 'Y'
 				AND B.USE_STATE = 'Y'
+				AND B.DISPLAY_YN = 'Y'
 				AND A.BOARD_ID = #{board_id}
 		]]>
 			<if test='post_cat != null and !post_cat.equals("")'>
@@ -168,6 +172,7 @@
 				A.USE_STATE = 'Y'
 				AND A.DISPLAY_YN = 'Y'
 				AND B.USE_STATE = 'Y'
+				AND B.DISPLAY_YN = 'Y'
 				AND A.BOARD_ID = #{board_id}
 			ORDER BY
 				A.POST_SN DESC
@@ -188,6 +193,7 @@
 				A.USE_STATE = 'Y'
 				AND A.DISPLAY_YN = 'Y'
 				AND B.USE_STATE = 'Y'
+				AND B.DISPLAY_YN = 'Y'
 				AND A.BOARD_ID = #{board_id}
 		]]>
 			<if test='post_cat != null and !post_cat.equals("")'>

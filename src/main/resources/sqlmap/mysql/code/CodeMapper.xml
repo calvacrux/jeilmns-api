@@ -14,6 +14,7 @@
 				TB_CODE A
 			WHERE
 				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
 				AND A.CODE_ID = #{code_id}
 		]]>
 	</select>
@@ -28,6 +29,7 @@
 				TB_CODE A
 			WHERE
 				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
 				AND A.P_CODE_ID = #{parent_code_id}
 				AND A.CODE_DEPTH = 2
 			ORDER BY

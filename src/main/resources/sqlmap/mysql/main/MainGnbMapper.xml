@@ -28,6 +28,7 @@
 				TB_CODE A
 			WHERE
 				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
 				AND LEFT(A.P_CODE_ID, 9) = 'code.cert'	
 			UNION ALL 
 			SELECT
@@ -40,6 +41,7 @@
 				TB_CODE A
 			WHERE
 				A.USE_STATE = 'Y'
+				AND A.DISPLAY_YN = 'Y'
 				AND LEFT(A.P_CODE_ID, 9) = 'code.news'	
 			ORDER BY
 				MENU_TYPE DESC, SORT_NO ASC

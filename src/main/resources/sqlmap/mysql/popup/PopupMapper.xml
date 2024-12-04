@@ -25,6 +25,7 @@
 			WHERE
 				A.USE_STATE = 'Y'
 				AND A.DISPLAY_YN = 'Y'
+				AND C.DISPLAY_YN = 'Y'
 				AND A.POPUP_ID = #{popup_id}
 			ORDER BY
 				A.POPUP_SN DESC

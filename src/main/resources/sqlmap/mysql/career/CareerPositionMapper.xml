@@ -27,6 +27,7 @@
 				INNER JOIN TB_CODE B ON (B.CODE_ID = A.POSITION_CAT)
 			WHERE
 				A.USE_STATE = 'Y'
+				AND B.DISPLAY_YN = 'Y'
 			 	AND A.POSITION_SN = #{position_sn}
 		]]>
 	</select>
@@ -48,6 +49,7 @@
 			WHERE
 				A.USE_STATE = 'Y'
 				AND A.DISPLAY_YN = 'Y'
+				AND B.DISPLAY_YN = 'Y'
 				AND A.POSITION_ID = #{position_id}
 			ORDER BY
 				A.POSITION_SN DESC
