@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import jeilm.api.app.invest.vo.DisclosureDetailVO;
 import jeilm.api.app.invest.vo.DisclosureListVO;
+import jeilm.api.app.invest.vo.DisclosureMainVO;
 import jeilm.api.app.invest.vo.DisclosureNextVO;
 import jeilm.api.app.invest.vo.DisclosurePrevVO;
 
@@ -46,11 +47,11 @@ public interface DisclosureMapper {
 	
 	/**
 	 * 포스트 리스트 조회 - 메인
-	 * @param disclosureListVO
+	 * @param disclosureMainVO
 	 * @return
 	 * @throws Exception
 	 */
-	List<DisclosureListVO> selectPostListForMain(DisclosureListVO disclosureListVO) throws Exception;
+	List<DisclosureMainVO> selectPostListForMain(DisclosureMainVO disclosureMainVO) throws Exception;
 	
 	/**
 	 * 포스트 카운트 조회

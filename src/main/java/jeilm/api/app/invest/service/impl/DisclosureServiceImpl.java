@@ -8,6 +8,7 @@ import jeilm.api.app.invest.service.DisclosureService;
 import jeilm.api.app.invest.service.mapper.DisclosureMapper;
 import jeilm.api.app.invest.vo.DisclosureDetailVO;
 import jeilm.api.app.invest.vo.DisclosureListVO;
+import jeilm.api.app.invest.vo.DisclosureMainVO;
 import jeilm.api.app.invest.vo.DisclosureNextVO;
 import jeilm.api.app.invest.vo.DisclosurePrevVO;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +40,8 @@ public class DisclosureServiceImpl implements DisclosureService {
 	}
 	
 	@Override
-	public List<DisclosureListVO> selectPostListForMain(DisclosureListVO disclosureListVO) throws Exception {
-		return disclosureMapper.selectPostListForMain(disclosureListVO);
+	public List<DisclosureMainVO> selectPostListForMain(DisclosureMainVO disclosureMainVO) throws Exception {
+		return disclosureMapper.selectPostListForMain(disclosureMainVO);
 	}
 	
 	@Override

@@ -10,4 +10,10 @@ public interface DartReportClient {
 	
 	@GetMapping("")
 	Object getDartReportClient(URI dartReportUri);
+	
+	@GetMapping("")
+	String getDartReportClientString(URI dartReportUri);
+	
+	@GetMapping("")
+	Object getDartReportClientObject(URI dartReportUri);
 }
