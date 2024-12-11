@@ -26,6 +26,34 @@ public class ProductInfoDetailVO implements Serializable {
 	private String category_id;					// 카테고리 아이디
 	private String category_nm;					// 카테고리 이름
 	
+	// 파일 - 썸네일 - 메인
+	@JsonIgnore
+	private String file_path_thumb_main;			// 썸네일 파일 경로
+	
+	// 파일 - 썸네일 - 01
+	public String file_url_thumb_main;			// 썸네일 파일 URL
+	public String getFile_url_thumb_main() {
+		if (file_path_thumb_main == null) {
+			return null;
+		} else {
+			return AppConstant.storagePath.concat(file_path_thumb_main);
+		}
+	}
+	
+	// 파일 - 제품배경
+	@JsonIgnore
+	private String file_path_background;			// 제품배경 파일 경로
+	
+	// 파일 - 썸네일 - 01
+	public String file_url_background;			// 제품배경 파일 URL
+	public String getFile_url_background() {
+		if (file_path_background == null) {
+			return null;
+		} else {
+			return AppConstant.storagePath.concat(file_path_background);
+		}
+	}
+	
 	// 파일 - 썸네일 - 01
 	@JsonIgnore
 	private String file_path_thumb_01;			// 썸네일 파일 경로

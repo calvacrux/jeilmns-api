@@ -27,15 +27,15 @@ public class ProductInfoListVO implements Serializable {
 	
 	// 파일 - 썸네일 - 01
 	@JsonIgnore
-	private String file_path_thumb_01;			// 썸네일 파일 경로
+	private String file_path_thumb_main;			// 썸네일 파일 경로
 	
 	// 파일 - 썸네일 - 01
-	public String file_url_thumb_01;			// 썸네일 파일 URL
-	public String getFile_url_thumb_01() {
-		if (file_path_thumb_01 == null) {
+	public String file_url_thumb_main;			// 썸네일 파일 URL
+	public String getFile_url_thumb_main() {
+		if (file_path_thumb_main == null) {
 			return null;
 		} else {
-			return AppConstant.storagePath.concat(file_path_thumb_01);
+			return AppConstant.storagePath.concat(file_path_thumb_main);
 		}
 	}
 	
