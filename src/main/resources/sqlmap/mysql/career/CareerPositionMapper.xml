@@ -52,7 +52,7 @@
 				AND B.DISPLAY_YN = 'Y'
 				AND A.POSITION_ID = #{position_id}
 			ORDER BY
-				A.POSITION_SN DESC
+				A.SORT_NO ASC
 		]]>
 	</select>
 	
