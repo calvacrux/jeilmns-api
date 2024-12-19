@@ -22,8 +22,6 @@ public class PopupVO implements Serializable {
 	private String popup_cat_nm;			// 팝업 카테고리 이름
 	private String popup_title;				// 팝업 제목
 	private String popup_content;			// 팝업 내용
-	private int popup_width;				// 팝업 넓이
-	private int popup_height;				// 팝업 높이
 	private String link_url;				// 링크 URL
 	
 	// 파일 - 본문
